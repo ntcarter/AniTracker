@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_black"
+    tools:context=".ui.gallery.GalleryFragment">
+
+    <HorizontalScrollView
+        android:id="@+id/scroll_view_anime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="1dp"
+        android:scrollbars="none"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chip_group_options"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            app:selectionRequired="true"
+            app:singleLine="true"
+            app:singleSelection="true">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_score"
+                style="@style/AniTracker.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="Score" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_popularity"
+                style="@style/AniTracker.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Popularity" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_currently_airing"
+                style="@style/AniTracker.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Currently Airing" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_upcoming"
+                style="@style/AniTracker.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Upcoming" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_tv_only"
+                style="@style/AniTracker.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TV Only" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_movies"
+                style="@style/AniTracker.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Movies" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_manga_score"
+                style="@style/AniTracker.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Top Manga"
+                android:visibility="gone" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_manga_popularity"
+                style="@style/AniTracker.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Most Popular"
+                android:visibility="gone" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_manga_one_shot"
+                style="@style/AniTracker.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="One-Shots"
+                android:visibility="gone" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_manga_doujin"
+                style="@style/AniTracker.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Doujinshi"
+                android:visibility="gone" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_manga_light_novel"
+                style="@style/AniTracker.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="manhua"
+                android:visibility="gone" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_manga_novel"
+                style="@style/AniTracker.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Novels"
+                android:visibility="gone" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_manga_manhwa"
+                style="@style/AniTracker.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Manhwa"
+                android:visibility="gone" />
+        </com.google.android.material.chip.ChipGroup>
+    </HorizontalScrollView>
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chip_group_anime_manga"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scroll_view_anime"
+        app:layout_constraintVertical_bias="0.0"
+        app:selectionRequired="true"
+        app:singleSelection="true">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_anime"
+            style="@style/AniTracker.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="Anime" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_manga"
+            style="@style/AniTracker.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Manga" />
+
+    </com.google.android.material.chip.ChipGroup>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvGallery"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/item_gallery" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,9 +1,9 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.AniTracker" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.AniTracker" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimary">@color/background_black</item>
+        <item name="colorPrimaryVariant">@color/background_black</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -12,5 +12,14 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+    </style>
+
+    <style name="AniTracker.MaterialComponents.Chip.Choice" parent="Widget.MaterialComponents.Chip.Choice">
+        <!-- background color -->
+        <item name="chipBackgroundColor">@color/bg_chip_state_list</item>
+        <item name="chipStrokeColor">@color/text_red</item>
+        <item name="chipStrokeWidth">2dp</item>
+        <item name="android:textStyle"></item>
+        <item name="android:textColor">@color/text_chip_state_list</item>
     </style>
 </resources>

@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/githubDesktop/AniTracker/app/src/main/res/drawable/gradient.xml" value="0.3769230769230769" />
+        <entry key="..\:/githubDesktop/AniTracker/app/src/main/res/drawable/ic_error.xml" value="0.22135416666666666" />
+        <entry key="..\:/githubDesktop/AniTracker/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
+        <entry key="..\:/githubDesktop/AniTracker/app/src/main/res/layout/fragment_gallery.xml" value="0.33" />
+        <entry key="..\:/githubDesktop/AniTracker/app/src/main/res/layout/gallery_fragment.xml" value="0.33" />
+        <entry key="..\:/githubDesktop/AniTracker/app/src/main/res/layout/item_gallery.xml" value="0.36666666666666664" />
+        <entry key="..\:/githubDesktop/AniTracker/app/src/main/res/layout/item_options_button.xml" value="0.25" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

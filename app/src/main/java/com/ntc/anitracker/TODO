@@ -1,0 +1,13 @@
+//TODO change UI recycler view to decoration and take into account screen width etc to show a certain
+//TODO number of covers on a scree at a time or change the preset size of the cover
+
+//TODO Implement a details screen for tapping on a cover based on if its an anime or manga
+//TODO one class for all anime and one class for all "manga" types
+
+//TODO Add A score and name for each cover
+
+//TODO User score? add a spot for user scores on the cover/details
+//TODO Add and track user scores in a DB
+//TODO load user score lists from MAL and other scoring sites?
+
+//TODO move the starting position down on the recycler view
