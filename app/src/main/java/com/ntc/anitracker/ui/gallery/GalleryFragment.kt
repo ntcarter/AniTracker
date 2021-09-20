@@ -5,18 +5,21 @@ import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.paging.PagingData
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.chip.Chip
 import com.ntc.anitracker.R
 import com.ntc.anitracker.api.models.topanime.TopA
 import com.ntc.anitracker.databinding.FragmentGalleryBinding
-import com.ntc.anitracker.ui.adapters.GalleryAnimeAdapter
-import com.ntc.anitracker.ui.adapters.GalleryMangaAdapter
+import com.ntc.anitracker.ui.adapters.galleryadapters.GalleryAnimeAdapter
+import com.ntc.anitracker.ui.adapters.galleryadapters.GalleryMangaAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 private const val TAG = "GalleryFragment"
-
+private const val TAP_LOCK_TIME_MILLISECONDS = 1500
 @AndroidEntryPoint
 class GalleryFragment : Fragment(R.layout.fragment_gallery),
     GalleryAnimeAdapter.OnItemClickListener,
@@ -29,6 +32,9 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery),
 
     private lateinit var animeAdapter: GalleryAnimeAdapter
     private lateinit var mangaAdapter: GalleryMangaAdapter
+
+    // Keeps track of time since resumed to lock the user out of a tap for 1.5 seconds
+    private var timeResumed: Long = 0L
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -53,7 +59,7 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery),
 
         viewModel.getAnimeGalleryData().observe(viewLifecycleOwner) {
             if (viewModel.animeActive) {
-                animeAdapter.submitData(viewLifecycleOwner.lifecycle, it as PagingData<TopA>)
+                animeAdapter.submitData(viewLifecycleOwner.lifecycle, it)
                 binding.apply {
                     rvGallery.adapter = animeAdapter
                     rvGallery.scrollToPosition(0)
@@ -73,6 +79,12 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery),
 
         // initial call to load data
         viewModel.getAnimeGalleryData()
+    }
+
+    override fun onResume() {
+        Log.d(TAG, "onResume: recording time")
+        timeResumed = System.currentTimeMillis()
+        super.onResume()
     }
 
     private fun setUpChipGroupListeners() {
@@ -97,16 +109,7 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery),
 
                 val activeChip: Chip? = chipGroupOptions.findViewById(checkedId)
                 if (activeChip != null) {
-                    Log.d(TAG, "setUpChipGroupListeners: SETTING OPTIONS : ${activeChip.text} ")
                     viewModel.activeOption.value = activeChip.text.toString()
-
-                    if (viewModel.animeActive) {
-                        Log.d(TAG, "setUpChipGroupListeners: GETTING ANIME DATA HERE")
-                        viewModel.getAnimeGalleryData()
-                    } else {
-                        Log.d(TAG, "setUpChipGroupListeners: GETTING MANGA DATA HERE")
-                        viewModel.getMangaGalleryData()
-                    }
                 }
             }
         }
@@ -182,6 +185,20 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery),
         }
     }
 
+    override fun onCoverClick(anime: TopA) {
+        lifecycleScope.launch {
+            var currentTime = System.currentTimeMillis()
+            // The API is a little slow so delay a users quick tap
+            while (currentTime - timeResumed < TAP_LOCK_TIME_MILLISECONDS) {
+                delay(1000)
+                currentTime = System.currentTimeMillis()
+            }
+            // pass the anime to the details fragment. It will handle making further api calls
+            val action =
+                GalleryFragmentDirections.actionGalleryFragmentToAnimeDetailsFragment(anime)
+            findNavController().navigate(action)
+        }
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

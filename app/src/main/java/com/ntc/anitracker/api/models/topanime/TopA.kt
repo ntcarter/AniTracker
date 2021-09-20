@@ -1,5 +1,9 @@
 package com.ntc.anitracker.api.models.topanime
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class TopA(
     val end_date: String,
     val episodes: Int,
@@ -12,4 +16,4 @@ data class TopA(
     val title: String,
     val type: String,
     val url: String
-)
+) : Parcelable

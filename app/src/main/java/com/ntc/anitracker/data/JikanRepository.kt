@@ -114,4 +114,7 @@ class JikanRepository @Inject constructor(private val jikanAPI: JikanAPI) {
         return resultManga
     }
 
+    suspend fun getAnimeDataFromJikan(malId: Int) = jikanAPI.getAnimeData(malId)
+
+    suspend fun getAnimeCharacters(malId: Int) = jikanAPI.getAnimeCharacters(malId)
 }

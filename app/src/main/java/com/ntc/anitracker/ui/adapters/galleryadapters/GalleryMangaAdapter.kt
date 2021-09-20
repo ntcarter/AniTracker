@@ -1,4 +1,4 @@
-package com.ntc.anitracker.ui.adapters
+package com.ntc.anitracker.ui.adapters.galleryadapters
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.ntc.anitracker.R
-import com.ntc.anitracker.api.models.topanime.TopA
 import com.ntc.anitracker.api.models.topmanga.TopM
 import com.ntc.anitracker.databinding.ItemGalleryBinding
 
@@ -45,6 +44,10 @@ class GalleryMangaAdapter(
                     .transition(DrawableTransitionOptions.withCrossFade())
                     .error(R.drawable.ic_error)
                     .into(imageCover)
+
+                titleText.text = top.title
+                titleText.text = top.title
+                tvScore.text = top.score.toString()
             }
         }
     }

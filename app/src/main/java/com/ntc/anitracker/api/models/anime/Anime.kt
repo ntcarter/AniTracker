@@ -31,7 +31,7 @@ data class Anime(
     val studios: List<Studio>,
     val synopsis: String,
     val title: String,
-    val title_english: String,
+    val title_english: String?,
     val title_japanese: String,
     val title_synonyms: List<String>,
     val trailer_url: String,

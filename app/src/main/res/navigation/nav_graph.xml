@@ -9,5 +9,42 @@
         android:id="@+id/galleryFragment"
         android:name="com.ntc.anitracker.ui.gallery.GalleryFragment"
         android:label="fragment_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_gallery" >
+        <action
+            android:id="@+id/action_galleryFragment_to_animeDetailsFragment"
+            app:destination="@id/animeDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/animeDetailsFragment"
+        android:name="com.ntc.anitracker.ui.details.animedetails.AnimeDetailsFragment"
+        android:label="AnimeDetailsFragment"
+        tools:layout="@layout/fragment_anime_details">
+        <argument
+            android:name="TopA"
+            app:argType="com.ntc.anitracker.api.models.topanime.TopA" />
+        <action
+            android:id="@+id/action_animeDetailsFragment_to_charactersAndStaffFragment"
+            app:destination="@id/charactersAndStaffFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/charactersAndStaffFragment"
+        android:name="com.ntc.anitracker.ui.details.charactersandstaff.CharactersAndStaffFragment"
+        android:label="CharactersAndStaffFragment"
+        tools:layout="@layout/fragment_characters_staff">
+        <argument
+            android:name="animeId"
+            app:argType="integer" />
+        <argument
+            android:name="titleTextColor"
+            app:argType="integer" />
+        <argument
+            android:name="bodyTextColor"
+            app:argType="integer" />
+        <argument
+            android:name="buttonColor"
+            app:argType="integer" />
+        <argument
+            android:name="bgColor"
+            app:argType="integer" />
+    </fragment>
 </navigation>

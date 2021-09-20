@@ -22,4 +22,20 @@
         <item name="android:textStyle"></item>
         <item name="android:textColor">@color/text_chip_state_list</item>
     </style>
+
+    <style name="Theme.AniTracker.cardView" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">@color/background_black</item>
+        <item name="strokeWidth">2dp</item>
+        <item name="strokeColor">@color/text_red</item>
+    </style>
+
+    <style name="AlertDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="buttonBarPositiveButtonStyle">@style/PositiveButtonStyle</item>
+        <item name="android:background">@color/background_black</item>
+        <item name="android:textColorPrimary">@color/text_red</item>
+    </style>
+
+    <style name="PositiveButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/text_red</item>
+    </style>
 </resources>

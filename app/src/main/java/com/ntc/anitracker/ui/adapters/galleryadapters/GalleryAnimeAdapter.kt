@@ -1,6 +1,5 @@
-package com.ntc.anitracker.ui.adapters
+package com.ntc.anitracker.ui.adapters.galleryadapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
@@ -9,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.ntc.anitracker.R
+import com.ntc.anitracker.api.models.anime.Anime
 import com.ntc.anitracker.api.models.topanime.TopA
 import com.ntc.anitracker.databinding.ItemGalleryBinding
 
@@ -16,8 +16,7 @@ private const val TAG = "GalleryAnimeAdapter"
 
 class GalleryAnimeAdapter(
     private val listener: OnItemClickListener
-) :
-    PagingDataAdapter<TopA, GalleryAnimeAdapter.TopAnimeViewHolder>(TOP_ANIME_COMPARATOR) {
+) : PagingDataAdapter<TopA, GalleryAnimeAdapter.TopAnimeViewHolder>(TOP_ANIME_COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopAnimeViewHolder {
         val binding = ItemGalleryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -32,7 +31,9 @@ class GalleryAnimeAdapter(
         }
     }
 
-    interface OnItemClickListener {}
+    interface OnItemClickListener {
+        fun onCoverClick(anime: TopA)
+    }
 
     inner class TopAnimeViewHolder(private val binding: ItemGalleryBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -43,6 +44,13 @@ class GalleryAnimeAdapter(
                     .transition(DrawableTransitionOptions.withCrossFade())
                     .error(R.drawable.ic_error)
                     .into(imageCover)
+
+                imageCover.setOnClickListener {
+                    listener.onCoverClick(top)
+                }
+
+                titleText.text = top.title
+                tvScore.text = top.score.toString()
             }
         }
     }

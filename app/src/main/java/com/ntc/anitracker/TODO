@@ -1,13 +1,31 @@
-//TODO change UI recycler view to decoration and take into account screen width etc to show a certain
-//TODO number of covers on a scree at a time or change the preset size of the cover
-
 //TODO Implement a details screen for tapping on a cover based on if its an anime or manga
 //TODO one class for all anime and one class for all "manga" types
 
-//TODO Add A score and name for each cover
+// TODO back buttons on character/details screens
+//TODO button functionality
+//TODO details UI
+//TODO ??back button? hide on scroll down and show on scroll up or at top?
+//TODO create landscape versions for most screens (especially details screens)
+
+//TODO replace details image with image slider and api call (open a dialog to show other images)
+
+//TODO Add loading footers and headers
+
+//TODO change UI recycler view to decoration and take into account screen width etc to show a certain
+//TODO number of covers on a scree at a time or change the preset size of the cover
+
+//TODO move the starting position down on the gallery recycler view
+
+//TODO hide buttons on scroll down (gallery) show on scroll up
 
 //TODO User score? add a spot for user scores on the cover/details
 //TODO Add and track user scores in a DB
-//TODO load user score lists from MAL and other scoring sites?
+//TODO 9/16..etc load user score lists from MAL and other scoring sites?
+//TODO MAL/others integration
 
-//TODO move the starting position down on the recycler view
+//TODO maybe add a slight gradient behind the buttons at the top of the gallery
+
+//TODO Seasons
+//TODO searching
+//TODO Load from room instead of calls in certain situations? things that dont change often like top scored anime
+//TODO if the API or MAL lags too (or is down) much a call will return a 503 error. Might want to do something about that specifically

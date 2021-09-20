@@ -1,5 +1,7 @@
 package com.ntc.anitracker.api.retrofit
 
+import com.ntc.anitracker.api.models.anime.Anime
+import com.ntc.anitracker.api.models.charactersandstaff.CharactersAndStaff
 import com.ntc.anitracker.api.models.topanime.TopAnime
 import com.ntc.anitracker.api.models.topmanga.TopManga
 import retrofit2.http.GET
@@ -10,6 +12,8 @@ interface JikanAPI {
     companion object {
         const val BASE_URL = "https://api.jikan.moe"
     }
+
+    // anime API calls
 
     @GET("/v3/top/anime/{page}")
     suspend fun getTopAnime(
@@ -40,6 +44,13 @@ interface JikanAPI {
     suspend fun getMoviesAnime(
         @Path("page") page: Int
     ): TopAnime
+
+    @GET("/v3/anime/{id}")
+    suspend fun getAnimeData(
+        @Path("id") id: Int
+    ): Anime
+
+    // Manga API calls
 
     @GET("/v3/top/manga/{page}")
     suspend fun getTopManga(
@@ -76,12 +87,12 @@ interface JikanAPI {
         @Path("page") page: Int
     ): TopManga
 
+    // Characters and Staff
+    @GET("/v3/anime/{id}/characters_staff")
+    suspend fun getAnimeCharacters(
+        @Path("id") id: Int
+    ): CharactersAndStaff
 
-//    @GET("/anime/{id}")
-//    suspend fun getAnimeData(
-//        @Path("id") id: String
-//    ): Anime
-//
 //    suspend fun searchAnime(
 //        @Query("query") query: String,
 //        @Query("page") page: Int,
