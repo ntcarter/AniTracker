@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/clBG"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/ivChar"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toTopOf="@+id/cgCharacterDetails"
+        app:layout_constraintEnd_toStartOf="@+id/scrollView2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_weight="43"
+        tools:srcCompat="@drawable/test_image" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvOgraphy"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/rvVoiceActor"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cgCharacterDetails"
+        app:layout_constraintVertical_weight="50"
+        tools:listitem="@layout/item_image_two_text" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvVoiceActor"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/rvOgraphy"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2"
+        app:layout_constraintVertical_weight="50"
+        tools:listitem="@layout/item_image_two_text" />
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintBottom_toTopOf="@+id/rvVoiceActor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/ivChar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_weight="50">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvNameEN"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                tools:text="Maes Hughes" />
+
+            <TextView
+                android:id="@+id/tvNameJp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                tools:text="(マース･ヒューズ)" />
+
+            <TextView
+                android:id="@+id/tvCharDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="Maes Hughes is a character that is hard not to love. He is often seen as the comedy relief, but has his debuts as a serious and skilled fighter. He is best friends with Roy Mustang (and would do anything to help Roy achieve his goals) and a loving and devoted husband/father. Maes would do anything for his wife Gracia and always carries pictures of his daughter Elycia in his uniform and never misses a chance to show everyone how cute she is. He starts out in the anime as a Major in the Investigation Division and eventually becomes a Lieutenant Colonel." />
+        </LinearLayout>
+    </ScrollView>
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/cgCharacterDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginBottom="4dp"
+        app:checkedChip="@id/chipAnimeography"
+        app:layout_constraintBottom_toTopOf="@+id/rvOgraphy"
+        app:layout_constraintEnd_toStartOf="@+id/scrollView2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivChar"
+        app:layout_constraintVertical_weight="7"
+        app:selectionRequired="true"
+        app:singleSelection="true">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipAnimeography"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checkable="true"
+            android:checked="true"
+            android:text="Anime"
+            android:textAlignment="viewStart"
+            app:checkedIconVisible="false" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipMangaography"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checkable="true"
+            android:text="Manga"
+            android:textAlignment="viewStart"
+            app:checkedIconVisible="false" />
+    </com.google.android.material.chip.ChipGroup>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

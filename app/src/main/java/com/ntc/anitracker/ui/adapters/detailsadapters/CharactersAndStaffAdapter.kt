@@ -3,19 +3,18 @@ package com.ntc.anitracker.ui.adapters.detailsadapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.ntc.anitracker.R
-import com.ntc.anitracker.api.models.charactersandstaff.Character
 import com.ntc.anitracker.api.models.charactersandstaff.CharacterStaff
 import com.ntc.anitracker.databinding.ItemCharacterStaffBinding
 
 class CharactersAndStaffAdapter(
     private val infoList: List<CharacterStaff>,
     val titleTextColor:Int,
+    val listener: CharacterStaffClick
 ) : RecyclerView.Adapter<CharactersAndStaffAdapter.CharactersAndStaffViewHolder>() {
 
     override fun onCreateViewHolder(
@@ -41,6 +40,11 @@ class CharactersAndStaffAdapter(
         return infoList.size
     }
 
+    interface CharacterStaffClick{
+        fun onCharacterClick(mal_id: Int)
+        fun onStaffClick(mal_id: Int)
+    }
+
     inner class CharactersAndStaffViewHolder(private val binding: ItemCharacterStaffBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
@@ -52,10 +56,15 @@ class CharactersAndStaffAdapter(
                     .transition(DrawableTransitionOptions.withCrossFade())
                     .error(R.drawable.ic_error)
                     .into(ivPerson)
+                ivPerson.setOnClickListener {
+                    listener.onCharacterClick(character.mal_id)
+                }
                 tvName.text = character.name
                 tvName.setTextColor(titleTextColor)
                 tvInfo.text = character.role
                 tvInfo.setTextColor(titleTextColor)
+
+                // Voice actor recyclerView initialization
                 if (!character.voice_actors.isNullOrEmpty()) {
                     rvVoiceActors.adapter = VoiceActorAdapter(character.voice_actors, titleTextColor)
                     if(character.voice_actors.size > 1){
@@ -78,6 +87,9 @@ class CharactersAndStaffAdapter(
                     .transition(DrawableTransitionOptions.withCrossFade())
                     .error(R.drawable.ic_error)
                     .into(ivPerson)
+                ivPerson.setOnClickListener {
+                    listener.onStaffClick(staff.mal_id)
+                }
                 tvName.text = staff.name
 
                 var positions = ""

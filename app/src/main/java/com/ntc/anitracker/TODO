@@ -1,18 +1,17 @@
-//TODO Implement a details screen for tapping on a cover based on if its an anime or manga
-//TODO one class for all anime and one class for all "manga" types
+//TODO Implement a details screen for tapping on a cover based on if its an anime(done) or manga
 
 // TODO back buttons on character/details screens
 //TODO button functionality
 //TODO details UI
 //TODO ??back button? hide on scroll down and show on scroll up or at top?
-//TODO create landscape versions for most screens (especially details screens)
+//TODO create landscape versions for most screens (especially details screens) or Disable landscape turning
 
 //TODO replace details image with image slider and api call (open a dialog to show other images)
 
 //TODO Add loading footers and headers
 
 //TODO change UI recycler view to decoration and take into account screen width etc to show a certain
-//TODO number of covers on a scree at a time or change the preset size of the cover
+//TODO number of covers on a screen at a time or change the preset size of the cover
 
 //TODO move the starting position down on the gallery recycler view
 
@@ -23,9 +22,10 @@
 //TODO 9/16..etc load user score lists from MAL and other scoring sites?
 //TODO MAL/others integration
 
-//TODO maybe add a slight gradient behind the buttons at the top of the gallery
 
 //TODO Seasons
 //TODO searching
-//TODO Load from room instead of calls in certain situations? things that dont change often like top scored anime
+//TODO Load from room instead of calls in certain situations? things that don't change often like top scored anime
 //TODO if the API or MAL lags too (or is down) much a call will return a 503 error. Might want to do something about that specifically
+
+//TODO Add a fab to any page with custom colors that allows for disabling of custom color for hard to read color combos

@@ -44,16 +44,16 @@ class AnimeDetailsFragment : Fragment(R.layout.fragment_anime_details) {
         _binding = FragmentAnimeDetailsBinding.bind(view)
 
         viewModel.anime.observe(viewLifecycleOwner, { anime ->
-            anime?.let { bindUI(anime) }
+            anime?.let { loadImage(anime) }
         })
 
         if (viewModel.anime.value == null) {
             // no anime data need to load new data from API
-            viewModel.getAnimeData(args.topA.mal_id)
+            viewModel.getAnimeData(args.malId)
         } else {
             // anime already has a value use that to bind instead of an api call
             // happens for things like screen rotations
-            bindUI(viewModel.anime.value!!)
+            loadImage(viewModel.anime.value!!)
         }
 
         // sometimes the UI doesn't update wait 5 seconds and if the default values are still active, update
@@ -61,25 +61,51 @@ class AnimeDetailsFragment : Fragment(R.layout.fragment_anime_details) {
             delay(3000)
             if (_binding != null && binding.tvAnimeNameEn.text == "Loading") {
                 if (viewModel.anime.value != null) {
-                    bindUI(viewModel.anime.value!!)
+                    loadImage(viewModel.anime.value!!)
                 } else {
-                    viewModel.getAnimeData(args.topA.mal_id)
+                    viewModel.getAnimeData(args.malId)
                 }
             }
         }
     }
 
     /**
+     * Loads the image into the imageView. This needs to be done before the rest of the UI since
+     * the UI text colors are calculated from the image
+     */
+    private fun loadImage(animeInfo: Anime) {
+        binding.apply {
+            Glide.with(requireActivity())
+                .asBitmap()
+                .load(animeInfo.image_url)
+                .error(R.drawable.ic_error)
+                .into(object : CustomTarget<Bitmap>() {
+                    override fun onResourceReady(
+                        resource: Bitmap,
+                        transition: Transition<in Bitmap>?
+                    ) {
+                        ivCover.setImageBitmap(resource)
+                        createPaletteAsync(resource, animeInfo)
+                    }
+
+                    override fun onLoadCleared(placeholder: Drawable?) {}
+                })
+        }
+    }
+
+    /**
      * Takes the cover image as a bitmap and calculates a color palette
      */
-    private fun createPaletteAsync(bitmap: Bitmap) {
+    private fun createPaletteAsync(bitmap: Bitmap, animeInfo: Anime) {
         Palette.from(bitmap).generate() { palette ->
             if (palette != null) {
                 updateColors(
                     palette.lightMutedSwatch,
                     palette.darkMutedSwatch,
-                    palette.mutedSwatch,
-                    palette.darkVibrantSwatch
+//                    palette.mutedSwatch,
+                    palette.vibrantSwatch,
+                    palette.darkVibrantSwatch,
+                    animeInfo
                 )
             }
         }
@@ -89,7 +115,8 @@ class AnimeDetailsFragment : Fragment(R.layout.fragment_anime_details) {
         bodyTextColor: Palette.Swatch?,
         backgroundColor: Palette.Swatch?,
         titleTextColor: Palette.Swatch?,
-        buttonColor: Palette.Swatch?
+        buttonColor: Palette.Swatch?,
+        animeInfo: Anime
     ) {
 
         binding.apply {
@@ -147,6 +174,8 @@ class AnimeDetailsFragment : Fragment(R.layout.fragment_anime_details) {
                 btnReviews.setBackgroundColor(buttonColor.rgb)
                 btnRecommendations.setBackgroundColor(buttonColor.rgb)
             }
+
+            bindUI(animeInfo)
         }
     }
 
@@ -156,24 +185,6 @@ class AnimeDetailsFragment : Fragment(R.layout.fragment_anime_details) {
         }
 
         binding.apply {
-
-            Glide.with(requireActivity())
-                .asBitmap()
-                .load(animeInfo.image_url)
-                .error(R.drawable.ic_error)
-                .into(object : CustomTarget<Bitmap>() {
-                    override fun onResourceReady(
-                        resource: Bitmap,
-                        transition: Transition<in Bitmap>?
-                    ) {
-                        ivCover.setImageBitmap(resource)
-                        createPaletteAsync(resource)
-                    }
-
-                    override fun onLoadCleared(placeholder: Drawable?) {
-
-                    }
-                })
 
             tvAnimeScore.text = animeInfo.score.toString()
             tvUsersAmount.text = animeInfo.scored_by.toString()
@@ -187,6 +198,23 @@ class AnimeDetailsFragment : Fragment(R.layout.fragment_anime_details) {
             } else {
                 ""
             }
+            tvTextScore.text = "Score:"
+            tvUsersText.text = "Users:"
+            tvMyScoreText.text = "My Score:"
+            tvTextEpisodes.text = "Episodes:"
+            tvPopularityText.text = "Popularity"
+            tvStartedAiringText.text = "Started Airing:"
+            tvFinishedAiringText.text = "Finished Airing:"
+            tvSynopsisText.text = "Synopsis:"
+            tvGenresText.text = "Genres:"
+            tvOpeningsText.text = "Opening Themes:"
+            tvEndingsText.text = "Ending Themes:"
+            tvStudiosText.text = "Studios:"
+            btnCharactersAndStaff.text = "Characters And Staff Information"
+            btnRecommendations.text = "Recommendations"
+            btnReviews.text = "Reviews"
+            btnEpisodeinfo.text = "Episode Information"
+
             tvEpisodeCount.text = animeInfo.episodes.toString()
             tvPopularity.text = animeInfo.popularity.toString()
             tvAnimeNameEn.text = animeInfo.title_english ?: animeInfo.title
@@ -247,6 +275,30 @@ class AnimeDetailsFragment : Fragment(R.layout.fragment_anime_details) {
                         textTitleColor,
                         textBodyColor,
                         btnColor,
+                        bgColor
+                    )
+                findNavController().navigate(action)
+            }
+
+            btnRecommendations.setOnClickListener {
+                val action =
+                    AnimeDetailsFragmentDirections.actionAnimeDetailsFragmentToRecomendationsFragment(
+                        animeInfo.mal_id,
+                        textTitleColor,
+                        textBodyColor,
+                        bgColor,
+                        true,
+                        animeInfo.title
+                    )
+                findNavController().navigate(action)
+            }
+
+            btnEpisodeinfo.setOnClickListener {
+                val action =
+                    AnimeDetailsFragmentDirections.actionAnimeDetailsFragmentToEpisodesFragment(
+                        animeInfo.mal_id,
+                        textTitleColor,
+                        textBodyColor,
                         bgColor
                     )
                 findNavController().navigate(action)

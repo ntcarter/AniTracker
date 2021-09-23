@@ -19,12 +19,18 @@
         android:name="com.ntc.anitracker.ui.details.animedetails.AnimeDetailsFragment"
         android:label="AnimeDetailsFragment"
         tools:layout="@layout/fragment_anime_details">
-        <argument
-            android:name="TopA"
-            app:argType="com.ntc.anitracker.api.models.topanime.TopA" />
         <action
             android:id="@+id/action_animeDetailsFragment_to_charactersAndStaffFragment"
             app:destination="@id/charactersAndStaffFragment" />
+        <argument
+            android:name="mal_id"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_animeDetailsFragment_to_recomendationsFragment"
+            app:destination="@id/recomendationsFragment" />
+        <action
+            android:id="@+id/action_animeDetailsFragment_to_episodesFragment"
+            app:destination="@id/episodesFragment" />
     </fragment>
     <fragment
         android:id="@+id/charactersAndStaffFragment"
@@ -42,6 +48,99 @@
             app:argType="integer" />
         <argument
             android:name="buttonColor"
+            app:argType="integer" />
+        <argument
+            android:name="bgColor"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_charactersAndStaffFragment_to_characterDetailsFragment"
+            app:destination="@id/characterDetailsFragment" />
+        <action
+            android:id="@+id/action_charactersAndStaffFragment_to_personDetailsFragment"
+            app:destination="@id/personDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/characterDetailsFragment"
+        android:name="com.ntc.anitracker.ui.details.characterdetails.CharacterDetailsFragment"
+        android:label="CharacterDetailsFragment"
+        tools:layout="@layout/fragment_character_details">
+        <argument
+            android:name="characterId"
+            app:argType="integer" />
+        <argument
+            android:name="titleTextColor"
+            app:argType="integer" />
+        <argument
+            android:name="bodyTextColor"
+            app:argType="integer" />
+        <argument
+            android:name="bgColor"
+            app:argType="integer" />
+        <argument
+            android:name="buttonColor"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_characterDetailsFragment_to_animeDetailsFragment"
+            app:destination="@id/animeDetailsFragment" />
+        <action
+            android:id="@+id/action_characterDetailsFragment_to_personDetailsFragment"
+            app:destination="@id/personDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/personDetailsFragment"
+        android:name="com.ntc.anitracker.ui.details.persondetails.PersonDetailsFragment"
+        android:label="PersonDetailsFragment"
+        tools:layout="@layout/fragment_person_details">
+        <argument
+            android:name="personId"
+            app:argType="integer" />
+        <argument android:name="titleTextColor"
+            app:argType="integer" />
+        <argument
+            android:name="bodyTextColor"
+            app:argType="integer" />
+        <argument
+            android:name="bgColor"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/recomendationsFragment"
+        android:name="com.ntc.anitracker.ui.details.recommendation.RecommendationsFragment"
+        android:label="RecomendationsFragment"
+        tools:layout="@layout/fragment_recommendations">
+        <action
+            android:id="@+id/action_recomendationsFragment_to_animeDetailsFragment"
+            app:destination="@id/animeDetailsFragment" />
+        <argument
+            android:name="malId"
+            app:argType="integer" />
+        <argument
+            android:name="titleTextColor"
+            app:argType="integer" />
+        <argument
+            android:name="bodyTextColor"
+            app:argType="integer" />
+        <argument
+            android:name="bgColor"
+            app:argType="integer" />
+        <argument
+            android:name="isAnime"
+            app:argType="boolean" />
+        <argument
+            android:name="title"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/episodesFragment"
+        android:name="com.ntc.anitracker.ui.details.episode.EpisodesFragment"
+        android:label="EpisodesFragment"
+        tools:layout="@layout/fragment_episodes">
+        <argument android:name="malId"
+            app:argType="integer" />
+        <argument
+            android:name="titleTextColor"
+            app:argType="integer" />
+        <argument android:name="bodyTextColor"
             app:argType="integer" />
         <argument
             android:name="bgColor"

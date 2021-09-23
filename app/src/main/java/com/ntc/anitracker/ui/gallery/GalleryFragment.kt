@@ -195,7 +195,7 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery),
             }
             // pass the anime to the details fragment. It will handle making further api calls
             val action =
-                GalleryFragmentDirections.actionGalleryFragmentToAnimeDetailsFragment(anime)
+                GalleryFragmentDirections.actionGalleryFragmentToAnimeDetailsFragment(anime.mal_id)
             findNavController().navigate(action)
         }
     }

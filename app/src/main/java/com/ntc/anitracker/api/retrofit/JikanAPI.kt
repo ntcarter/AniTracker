@@ -1,7 +1,10 @@
 package com.ntc.anitracker.api.retrofit
 
 import com.ntc.anitracker.api.models.anime.Anime
+import com.ntc.anitracker.api.models.characterdetails.CharacterDetails
 import com.ntc.anitracker.api.models.charactersandstaff.CharactersAndStaff
+import com.ntc.anitracker.api.models.episode.EpisodeInfo
+import com.ntc.anitracker.api.models.recommendations.Recommendations
 import com.ntc.anitracker.api.models.topanime.TopAnime
 import com.ntc.anitracker.api.models.topmanga.TopManga
 import retrofit2.http.GET
@@ -50,8 +53,19 @@ interface JikanAPI {
         @Path("id") id: Int
     ): Anime
 
-    // Manga API calls
+    @GET("/v3/anime/{id}/recommendations")
+    suspend fun getRecommendations(
+        @Path("id") id: Int
+    ): Recommendations
 
+    @GET("https://api.jikan.moe/v3/anime/{id}/episodes/{page}")
+    suspend fun getEpisodeInformation(
+        @Path("page") page: Int,
+        @Path("id") id: Int
+    ): EpisodeInfo
+
+
+    // Manga API calls
     @GET("/v3/top/manga/{page}")
     suspend fun getTopManga(
         @Path("page") page: Int
@@ -92,6 +106,11 @@ interface JikanAPI {
     suspend fun getAnimeCharacters(
         @Path("id") id: Int
     ): CharactersAndStaff
+
+    @GET("/v3/character/{id}")
+    suspend fun getCharacterDetails(
+        @Path("id") id: Int
+    ): CharacterDetails
 
 //    suspend fun searchAnime(
 //        @Query("query") query: String,

@@ -30,7 +30,7 @@
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/test_image" />
+            tools:srcCompat="@drawable/test_image" />
 
         <TextView
             android:id="@+id/tvAnimeNameEn"
@@ -41,14 +41,13 @@
             android:layout_marginEnd="8dp"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="Loading"
             android:textAlignment="viewStart"
-            android:textColor="@color/text_red"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/ivCover"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Loading" />
 
         <TextView
             android:id="@+id/tvAnimeNameJp"
@@ -59,13 +58,12 @@
             android:layout_marginEnd="8dp"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="Loading"
-            android:textColor="@color/text_red"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/ivCover"
-            app:layout_constraintTop_toBottomOf="@+id/tvAnimeNameEn" />
+            app:layout_constraintTop_toBottomOf="@+id/tvAnimeNameEn"
+            tools:text="Loading" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline2"
@@ -80,12 +78,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="Score:"
-            android:textColor="@color/text_red"
             android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/ivCover"
-            app:layout_constraintTop_toBottomOf="@+id/tvAnimeNameJp" />
+            app:layout_constraintTop_toBottomOf="@+id/tvAnimeNameJp"
+            tools:text="Score:" />
 
         <TextView
             android:id="@+id/tvUsersText"
@@ -93,36 +90,33 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="Users:"
-            android:textColor="@color/text_red"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/tvAnimeScore"
-            app:layout_constraintTop_toBottomOf="@+id/tvAnimeNameJp" />
+            app:layout_constraintTop_toBottomOf="@+id/tvAnimeNameJp"
+            tools:text="Users:" />
 
         <TextView
             android:id="@+id/tvMyScoreText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="My Score:"
-            android:textColor="@color/text_red"
             android:textSize="28sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline2"
-            app:layout_constraintTop_toBottomOf="@+id/tvUsersText" />
+            app:layout_constraintTop_toBottomOf="@+id/tvUsersText"
+            tools:text="My Score:" />
 
         <TextView
             android:id="@+id/tvMyScore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="--"
-            android:textColor="@color/text_red"
             android:textSize="32sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/ivCover"
-            app:layout_constraintTop_toBottomOf="@+id/tvMyScoreText" />
+            app:layout_constraintTop_toBottomOf="@+id/tvMyScoreText"
+            tools:text="--" />
 
         <TextView
             android:id="@+id/tvTextEpisodes"
@@ -130,11 +124,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="Episodes: "
-            android:textColor="@color/text_red"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/ivCover"
-            app:layout_constraintTop_toBottomOf="@+id/tvMyScore" />
+            app:layout_constraintTop_toBottomOf="@+id/tvMyScore"
+            tools:text="Episodes: " />
 
         <TextView
             android:id="@+id/tvPopularityText"
@@ -142,11 +135,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="Popularity:"
-            android:textColor="@color/text_red"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/ivCover"
-            app:layout_constraintTop_toBottomOf="@+id/tvTextEpisodes" />
+            app:layout_constraintTop_toBottomOf="@+id/tvTextEpisodes"
+            tools:text="Popularity:" />
 
         <TextView
             android:id="@+id/tvStartedAiringText"
@@ -154,11 +146,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="Started Airing:"
-            android:textColor="@color/text_red"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/ivCover"
-            app:layout_constraintTop_toBottomOf="@+id/tvPopularityText" />
+            app:layout_constraintTop_toBottomOf="@+id/tvPopularityText"
+            tools:text="Started Airing:" />
 
         <TextView
             android:id="@+id/tvFinishedAiringText"
@@ -166,11 +157,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="Finished Airing:"
-            android:textColor="@color/text_red"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/ivCover"
-            app:layout_constraintTop_toBottomOf="@+id/tvStartedAiringText" />
+            app:layout_constraintTop_toBottomOf="@+id/tvStartedAiringText"
+            tools:text="Finished Airing:" />
 
         <TextView
             android:id="@+id/tvSynopsisText"
@@ -179,14 +169,13 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:text="Synopsis: "
             android:textAlignment="center"
-            android:textColor="@color/text_red"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvAiringEnd" />
+            app:layout_constraintTop_toBottomOf="@+id/tvAiringEnd"
+            tools:text="Synopsis: " />
 
         <TextView
             android:id="@+id/tvSynopsis"
@@ -195,13 +184,12 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:text="As a wild youth, elementary school student Shouya Ishida sought to beat boredom in the cruelest ways. When the deaf Shouko Nishimiya transfers into his class, Shouya and the rest of his class thoughtlessly bully her for fun. However, when her mother notifies the school, he is singled out and blamed for everything done to her. With Shouko transferring out of the school, Shouya is left at the mercy of his classmates. He is heartlessly ostracized all throughout elementary and middle school, while teachers turn a blind eye.  Now in his third year of high school, Shouya is still plagued by his wrongdoings as a young boy. Sincerely regretting his past actions, he sets out on a journey of redemption: to meet Shouko once more and make amends.  Koe no Katachi tells the heartwarming tale of Shouya's reunion with Shouko and his honest attempts to redeem himself, all while being continually haunted by the shadows of his past."
-            android:textColor="@color/text_red"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvSynopsisText" />
+            app:layout_constraintTop_toBottomOf="@+id/tvSynopsisText"
+            tools:text="As a wild youth, elementary school student Shouya Ishida sought to beat boredom in the cruelest ways. When the deaf Shouko Nishimiya transfers into his class, Shouya and the rest of his class thoughtlessly bully her for fun. However, when her mother notifies the school, he is singled out and blamed for everything done to her. With Shouko transferring out of the school, Shouya is left at the mercy of his classmates. He is heartlessly ostracized all throughout elementary and middle school, while teachers turn a blind eye.  Now in his third year of high school, Shouya is still plagued by his wrongdoings as a young boy. Sincerely regretting his past actions, he sets out on a journey of redemption: to meet Shouko once more and make amends.  Koe no Katachi tells the heartwarming tale of Shouya's reunion with Shouko and his honest attempts to redeem himself, all while being continually haunted by the shadows of his past." />
 
         <TextView
             android:id="@+id/tvGenres"
@@ -210,12 +198,11 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:text="Drama, School, Shounen"
-            android:textColor="@color/text_red"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tvGenresText"
-            app:layout_constraintTop_toBottomOf="@+id/tvSynopsis" />
+            app:layout_constraintTop_toBottomOf="@+id/tvSynopsis"
+            tools:text="Drama, School, Shounen" />
 
         <TextView
             android:id="@+id/tvGenresText"
@@ -223,12 +210,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="Genres:"
-            android:textColor="@color/text_red"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvSynopsis" />
+            app:layout_constraintTop_toBottomOf="@+id/tvSynopsis"
+            tools:text="Genres:" />
 
         <TextView
             android:id="@+id/tvOpeningsText"
@@ -236,12 +222,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="Opening Themes:"
-            android:textColor="@color/text_red"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvGenres" />
+            app:layout_constraintTop_toBottomOf="@+id/tvGenres"
+            tools:text="Opening Themes:" />
 
         <TextView
             android:id="@+id/tvOpeningThemes"
@@ -250,12 +235,11 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:text="Opening"
-            android:textColor="@color/text_red"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tvOpeningsText"
-            app:layout_constraintTop_toBottomOf="@+id/tvGenres" />
+            app:layout_constraintTop_toBottomOf="@+id/tvGenres"
+            tools:text="Opening" />
 
         <TextView
             android:id="@+id/tvEndingsText"
@@ -263,12 +247,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="Ending Themes:"
-            android:textColor="@color/text_red"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvOpeningThemes" />
+            app:layout_constraintTop_toBottomOf="@+id/tvOpeningThemes"
+            tools:text="Ending Themes:" />
 
         <TextView
             android:id="@+id/tvEndingThemes"
@@ -277,12 +260,11 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:text="Ending"
-            android:textColor="@color/text_red"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tvEndingsText"
-            app:layout_constraintTop_toBottomOf="@+id/tvOpeningThemes" />
+            app:layout_constraintTop_toBottomOf="@+id/tvOpeningThemes"
+            tools:text="Ending" />
 
         <TextView
             android:id="@+id/tvStudiosText"
@@ -290,12 +272,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="Studios:"
-            android:textColor="@color/text_red"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvEndingThemes" />
+            app:layout_constraintTop_toBottomOf="@+id/tvEndingThemes"
+            tools:text="Studios:" />
 
         <TextView
             android:id="@+id/tvStudios"
@@ -304,12 +285,11 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:text="Kyoto Animation"
-            android:textColor="@color/text_red"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tvStudiosText"
-            app:layout_constraintTop_toBottomOf="@+id/tvEndingThemes" />
+            app:layout_constraintTop_toBottomOf="@+id/tvEndingThemes"
+            tools:text="Kyoto Animation" />
 
         <TextView
             android:id="@+id/tvAnimeScore"
@@ -317,11 +297,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="8.35"
-            android:textColor="@color/text_red"
             android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@+id/tvTextScore"
-            app:layout_constraintTop_toBottomOf="@+id/tvAnimeNameJp" />
+            app:layout_constraintTop_toBottomOf="@+id/tvAnimeNameJp"
+            tools:text="8.35" />
 
         <TextView
             android:id="@+id/tvUsersAmount"
@@ -330,11 +309,10 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:text="313131"
-            android:textColor="@color/text_red"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tvUsersText"
-            app:layout_constraintTop_toBottomOf="@+id/tvAnimeNameJp" />
+            app:layout_constraintTop_toBottomOf="@+id/tvAnimeNameJp"
+            tools:text="313131" />
 
         <TextView
             android:id="@+id/tvAiringStartTime"
@@ -342,11 +320,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:text="Sep 17, 2016"
-            android:textColor="@color/text_red"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/tvAiringEnd"
-            app:layout_constraintTop_toBottomOf="@+id/tvPopularityText" />
+            app:layout_constraintTop_toBottomOf="@+id/tvPopularityText"
+            tools:text="Sep 17, 2016" />
 
         <TextView
             android:id="@+id/tvAiringEnd"
@@ -354,12 +331,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:text="Sep 17, 2016"
-            android:textColor="@color/text_red"
             app:layout_constraintBottom_toBottomOf="@+id/tvFinishedAiringText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tvFinishedAiringText"
-            app:layout_constraintTop_toTopOf="@+id/tvFinishedAiringText" />
+            app:layout_constraintTop_toTopOf="@+id/tvFinishedAiringText"
+            tools:text="Sep 17, 2016" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnCharactersAndStaff"
@@ -368,11 +344,10 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:text="Characters and Staff Information"
-            android:textColor="@color/text_red"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvStudios" />
+            app:layout_constraintTop_toBottomOf="@+id/tvStudios"
+            tools:text="Characters and Staff Information" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnRecommendations"
@@ -381,11 +356,10 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:text="Recommendations"
-            android:textColor="@color/text_red"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnCharactersAndStaff" />
+            app:layout_constraintTop_toBottomOf="@+id/btnCharactersAndStaff"
+            tools:text="Recommendations" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnEpisodeinfo"
@@ -394,11 +368,10 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:text="Episode Information"
-            android:textColor="@color/text_red"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/btnReviews"
-            app:layout_constraintTop_toBottomOf="@+id/btnRecommendations" />
+            app:layout_constraintTop_toBottomOf="@+id/btnRecommendations"
+            tools:text="Episode Information" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnReviews"
@@ -406,22 +379,20 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="Reviews"
-            android:textColor="@color/text_red"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnRecommendations" />
+            app:layout_constraintTop_toBottomOf="@+id/btnRecommendations"
+            tools:text="Reviews" />
 
         <TextView
             android:id="@+id/tvEpisodeCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="12"
-            android:textColor="@color/text_red"
             app:layout_constraintEnd_toEndOf="@+id/tvPopularity"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/tvPopularity"
-            app:layout_constraintTop_toBottomOf="@+id/tvMyScore" />
+            app:layout_constraintTop_toBottomOf="@+id/tvMyScore"
+            tools:text="12" />
 
         <TextView
             android:id="@+id/tvPopularity"
@@ -429,10 +400,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="45"
-            android:textColor="@color/text_red"
             app:layout_constraintStart_toEndOf="@+id/tvPopularityText"
-            app:layout_constraintTop_toBottomOf="@+id/tvEpisodeCount" />
+            app:layout_constraintTop_toBottomOf="@+id/tvEpisodeCount"
+            tools:text="45" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

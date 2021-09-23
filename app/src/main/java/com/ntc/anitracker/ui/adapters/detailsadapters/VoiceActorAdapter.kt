@@ -6,9 +6,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.ntc.anitracker.R
-import com.ntc.anitracker.api.models.charactersandstaff.Staff
 import com.ntc.anitracker.api.models.charactersandstaff.VoiceActor
-import com.ntc.anitracker.databinding.ItemVoiceActorBinding
+import com.ntc.anitracker.databinding.ItemImageTwoTextBinding
 
 class VoiceActorAdapter(
     private val voiceActorList: List<VoiceActor>,
@@ -17,7 +16,7 @@ class VoiceActorAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VoiceActorViewHolder {
         val binding =
-            ItemVoiceActorBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemImageTwoTextBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return VoiceActorViewHolder(binding)
     }
 
@@ -30,7 +29,7 @@ class VoiceActorAdapter(
         return voiceActorList.size
     }
 
-    inner class VoiceActorViewHolder(private val binding: ItemVoiceActorBinding) :
+    inner class VoiceActorViewHolder(private val binding: ItemImageTwoTextBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(voiceActor: VoiceActor) {
             binding.apply {

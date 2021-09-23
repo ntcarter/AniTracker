@@ -6,12 +6,14 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.liveData
+import com.ntc.anitracker.api.models.episode.Episode
 import com.ntc.anitracker.api.models.topanime.TopA
 import com.ntc.anitracker.api.models.topanime.TopAnime
 import com.ntc.anitracker.api.models.topmanga.TopM
 import com.ntc.anitracker.api.models.topmanga.TopManga
 import com.ntc.anitracker.api.retrofit.JikanAPI
 import com.ntc.anitracker.data.pagingsources.AnimePagingSource
+import com.ntc.anitracker.data.pagingsources.EpisodePagingSource
 import com.ntc.anitracker.data.pagingsources.MangaPagingSource
 import retrofit2.HttpException
 import javax.inject.Inject
@@ -23,26 +25,39 @@ private const val TAG = "JikanRepository"
 class JikanRepository @Inject constructor(private val jikanAPI: JikanAPI) {
 
     fun getAnimeGalleryData(activeOption: String): LiveData<PagingData<TopA>> {
-        Log.d(TAG, "getAnimeGalleryData: in the anime pager")
         return Pager(
             config = PagingConfig(
-                pageSize = 50, // this will later be passed as our params.loadsize value in the PagingSource
-                maxSize = 150,
-                enablePlaceholders = false
+                pageSize = 24, // this will later be passed as our params.loadsize value in the PagingSource
+                maxSize = 90,
+                enablePlaceholders = false,
+                prefetchDistance = 32
             ),
             pagingSourceFactory = { AnimePagingSource(activeOption, this) }
         ).liveData
     }
 
     fun getMangaGalleryData(activeOption: String): LiveData<PagingData<TopM>> {
-        Log.d(TAG, "getAnimeGalleryData: in the manga pager")
         return Pager(
             config = PagingConfig(
-                pageSize = 50, // this will later be passed as our params.loadsize value in the PagingSource
-                maxSize = 150,
-                enablePlaceholders = false
+                pageSize = 24, // this will later be passed as our params.loadsize value in the PagingSource
+                maxSize = 90,
+                enablePlaceholders = false,
+                prefetchDistance = 32
             ),
             pagingSourceFactory = { MangaPagingSource(activeOption, this) }
+        ).liveData
+    }
+
+    fun getEpisodeInformation(malId: Int): LiveData<PagingData<Episode>> {
+        Log.d(TAG, "getEpisodeInformation: IN GETEPISODE PAGER!!")
+        return Pager(
+            config = PagingConfig(
+                pageSize = 50,
+                maxSize = 150,
+                enablePlaceholders = false,
+                prefetchDistance = 50
+            ),
+            pagingSourceFactory = { EpisodePagingSource(jikanAPI, malId) }
         ).liveData
     }
 
@@ -107,7 +122,7 @@ class JikanRepository @Inject constructor(private val jikanAPI: JikanAPI) {
                     resultManga = jikanAPI.getManhwaManga(position)
                 }
             }
-        }catch (e: HttpException) {
+        } catch (e: HttpException) {
             Log.d(TAG, "makeJikanApiCall: ERROR HTTP $e")
         }
 
@@ -117,4 +132,9 @@ class JikanRepository @Inject constructor(private val jikanAPI: JikanAPI) {
     suspend fun getAnimeDataFromJikan(malId: Int) = jikanAPI.getAnimeData(malId)
 
     suspend fun getAnimeCharacters(malId: Int) = jikanAPI.getAnimeCharacters(malId)
+
+    suspend fun getCharacterDetails(characterId: Int) = jikanAPI.getCharacterDetails(characterId)
+
+    suspend fun getRecommendations(malId: Int) = jikanAPI.getRecommendations(malId)
+
 }

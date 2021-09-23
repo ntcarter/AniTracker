@@ -18,7 +18,7 @@ class AnimePagingSource(
 
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, TopA> {
-        val position = params.key ?: ANIME_STARTING_PAGE_INDEX
+        val position = params.key ?: ANIME_STARTING_PAGE_INDEX // gets the page number to load
 
         return try {
             val response = repository.makeAnimeApiCall(activeOption, position)
