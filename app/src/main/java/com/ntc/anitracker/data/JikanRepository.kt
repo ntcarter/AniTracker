@@ -7,6 +7,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.liveData
 import com.ntc.anitracker.api.models.episode.Episode
+import com.ntc.anitracker.api.models.reviews.Review
 import com.ntc.anitracker.api.models.topanime.TopA
 import com.ntc.anitracker.api.models.topanime.TopAnime
 import com.ntc.anitracker.api.models.topmanga.TopM
@@ -15,6 +16,7 @@ import com.ntc.anitracker.api.retrofit.JikanAPI
 import com.ntc.anitracker.data.pagingsources.AnimePagingSource
 import com.ntc.anitracker.data.pagingsources.EpisodePagingSource
 import com.ntc.anitracker.data.pagingsources.MangaPagingSource
+import com.ntc.anitracker.data.pagingsources.ReviewPagingSource
 import retrofit2.HttpException
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -58,6 +60,19 @@ class JikanRepository @Inject constructor(private val jikanAPI: JikanAPI) {
                 prefetchDistance = 50
             ),
             pagingSourceFactory = { EpisodePagingSource(jikanAPI, malId) }
+        ).liveData
+    }
+
+    fun getReviews(malId: Int, isAnime: Boolean): LiveData<PagingData<Review>> {
+        Log.d(TAG, "getReviews: IN REVIEW PAGER")
+        return Pager(
+            config = PagingConfig(
+                pageSize = 50,
+                maxSize = 150,
+                enablePlaceholders = false,
+                prefetchDistance = 50
+            ),
+            pagingSourceFactory = { ReviewPagingSource(jikanAPI, malId, isAnime) }
         ).liveData
     }
 

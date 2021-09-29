@@ -8,8 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ntc.anitracker.api.models.episode.Episode
 import com.ntc.anitracker.databinding.ItemEpisodeBinding
 
-class EpisodesAdapter(val titleTextColor: Int, val bodyTextColor: Int) :
+private const val TAG = "EpisodesAdapter"
+
+class EpisodesAdapter(var titleTextColor: Int, var bodyTextColor: Int) :
     PagingDataAdapter<Episode, EpisodesAdapter.EpisodeViewHolder>(TOP_EPISODE_COMPARATOR) {
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EpisodeViewHolder {
         val binding = ItemEpisodeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -20,17 +23,17 @@ class EpisodesAdapter(val titleTextColor: Int, val bodyTextColor: Int) :
         val currentItem = getItem(position)
 
         if (currentItem != null) {
-            holder.bind(currentItem, position)
+            holder.bind(currentItem)
         }
     }
 
     inner class EpisodeViewHolder(private val binding: ItemEpisodeBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(currentItem: Episode, position: Int) {
+        fun bind(currentItem: Episode) {
             binding.apply {
                 tvEpisodeNumber.text = currentItem.episode_id.toString()
                 tvEpisodeTitle.text = currentItem.title
-                tvEpisodeAiredDate.text = currentItem.aired.substring(0..9)
+                tvEpisodeAiredDate.text = currentItem.aired?.substring(0..9) ?: ""
                 tvEpisodeKanji.text = currentItem.title_japanese
                 tvEpisodeRomanji.text = currentItem.title_romanji
 

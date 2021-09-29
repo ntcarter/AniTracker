@@ -5,6 +5,7 @@ import com.ntc.anitracker.api.models.characterdetails.CharacterDetails
 import com.ntc.anitracker.api.models.charactersandstaff.CharactersAndStaff
 import com.ntc.anitracker.api.models.episode.EpisodeInfo
 import com.ntc.anitracker.api.models.recommendations.Recommendations
+import com.ntc.anitracker.api.models.reviews.Reviews
 import com.ntc.anitracker.api.models.topanime.TopAnime
 import com.ntc.anitracker.api.models.topmanga.TopManga
 import retrofit2.http.GET
@@ -64,6 +65,12 @@ interface JikanAPI {
         @Path("id") id: Int
     ): EpisodeInfo
 
+
+    @GET("https://api.jikan.moe/v3/anime/{id}/reviews/{page}")
+    suspend fun getAnimeReviews(
+        @Path("page") page: Int,
+        @Path("id") id: Int
+    ): Reviews
 
     // Manga API calls
     @GET("/v3/top/manga/{page}")

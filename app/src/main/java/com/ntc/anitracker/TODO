@@ -22,6 +22,7 @@
 //TODO 9/16..etc load user score lists from MAL and other scoring sites?
 //TODO MAL/others integration
 
+//TODO ending and opening themes broken
 
 //TODO Seasons
 //TODO searching
@@ -29,3 +30,9 @@
 //TODO if the API or MAL lags too (or is down) much a call will return a 503 error. Might want to do something about that specifically
 
 //TODO Add a fab to any page with custom colors that allows for disabling of custom color for hard to read color combos
+
+//TODO check for things like socket time outs and auto refresh the request if timed out
+//TODO alertDialog UI changes (create light and dark themes and set them based on the one chosen by the user)
+//TODO the gallery images are a bit long
+
+//TODO Anime detailsFragment UI changes. On smaller screens the text gets scrunched and overlaps

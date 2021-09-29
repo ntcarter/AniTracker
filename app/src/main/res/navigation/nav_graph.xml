@@ -31,6 +31,9 @@
         <action
             android:id="@+id/action_animeDetailsFragment_to_episodesFragment"
             app:destination="@id/episodesFragment" />
+        <action
+            android:id="@+id/action_animeDetailsFragment_to_fragmentReviews"
+            app:destination="@id/fragmentReviews" />
     </fragment>
     <fragment
         android:id="@+id/charactersAndStaffFragment"
@@ -142,6 +145,27 @@
             app:argType="integer" />
         <argument android:name="bodyTextColor"
             app:argType="integer" />
+        <argument
+            android:name="bgColor"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentReviews"
+        android:name="com.ntc.anitracker.ui.details.reviews.ReviewsFragment"
+        android:label="FragmentReviews"
+        tools:layout="@layout/fragment_reviews">
+        <argument
+            android:name="malId"
+            app:argType="integer" />
+        <argument
+            android:name="titleTextColor"
+            app:argType="integer" />
+        <argument
+            android:name="bodyTextColor"
+            app:argType="integer" />
+        <argument
+            android:name="isAnime"
+            app:argType="boolean" />
         <argument
             android:name="bgColor"
             app:argType="integer" />

@@ -3,6 +3,7 @@ package com.ntc.anitracker.ui.details.animedetails
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -102,8 +103,8 @@ class AnimeDetailsFragment : Fragment(R.layout.fragment_anime_details) {
                 updateColors(
                     palette.lightMutedSwatch,
                     palette.darkMutedSwatch,
-//                    palette.mutedSwatch,
-                    palette.vibrantSwatch,
+                    // sometimes the palette will not return a vibrantSwatch
+                    palette.vibrantSwatch ?: palette.mutedSwatch,
                     palette.darkVibrantSwatch,
                     animeInfo
                 )
@@ -165,6 +166,8 @@ class AnimeDetailsFragment : Fragment(R.layout.fragment_anime_details) {
                 btnEpisodeinfo.setTextColor(titleTextColor.rgb)
                 btnReviews.setTextColor(titleTextColor.rgb)
                 btnRecommendations.setTextColor(titleTextColor.rgb)
+            }else {
+                Log.d(TAG, "updateColors: NULLNULLLLLLL")
             }
 
             if (buttonColor != null) {
@@ -303,6 +306,19 @@ class AnimeDetailsFragment : Fragment(R.layout.fragment_anime_details) {
                     )
                 findNavController().navigate(action)
             }
+
+            Log.d(TAG, "bindUI: TEXTTITLE COLOR: $textTitleColor")
+            btnReviews.setOnClickListener {
+                val action =
+                    AnimeDetailsFragmentDirections.actionAnimeDetailsFragmentToFragmentReviews(
+                        animeInfo.mal_id,
+                        textTitleColor,
+                        textBodyColor,
+                        true,
+                        bgColor
+                    )
+                findNavController().navigate(action)
+            }
         }
     }
 
@@ -316,7 +332,7 @@ class AnimeDetailsFragment : Fragment(R.layout.fragment_anime_details) {
                         + "Japanese Title: \n\n"
                         + "${animeInfo.title_japanese} \n\n"
             )
-            .setPositiveButton("Cancel") { _, _ -> }
+            .setPositiveButton("Close") { _, _ -> }
             .create()
         dialog.show()
     }

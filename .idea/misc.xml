@@ -16,6 +16,7 @@
         <entry key="..\:/githubDesktop/AniTracker/app/src/main/res/layout/fragment_gallery.xml" value="0.33" />
         <entry key="..\:/githubDesktop/AniTracker/app/src/main/res/layout/fragment_person_details.xml" value="0.36666666666666664" />
         <entry key="..\:/githubDesktop/AniTracker/app/src/main/res/layout/fragment_recommendations.xml" value="0.36666666666666664" />
+        <entry key="..\:/githubDesktop/AniTracker/app/src/main/res/layout/fragment_reviews.xml" value="0.36666666666666664" />
         <entry key="..\:/githubDesktop/AniTracker/app/src/main/res/layout/gallery_fragment.xml" value="0.33" />
         <entry key="..\:/githubDesktop/AniTracker/app/src/main/res/layout/item_character_staff.xml" value="0.36666666666666664" />
         <entry key="..\:/githubDesktop/AniTracker/app/src/main/res/layout/item_episode.xml" value="0.5" />
@@ -23,6 +24,7 @@
         <entry key="..\:/githubDesktop/AniTracker/app/src/main/res/layout/item_image_two_text.xml" value="0.36666666666666664" />
         <entry key="..\:/githubDesktop/AniTracker/app/src/main/res/layout/item_options_button.xml" value="0.25" />
         <entry key="..\:/githubDesktop/AniTracker/app/src/main/res/layout/item_recommendation.xml" value="0.37864583333333335" />
+        <entry key="..\:/githubDesktop/AniTracker/app/src/main/res/layout/item_review.xml" value="0.5" />
         <entry key="..\:/githubDesktop/AniTracker/app/src/main/res/layout/item_voice_actor.xml" value="0.36666666666666664" />
       </map>
     </option>

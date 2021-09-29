@@ -1,7 +1,6 @@
 package com.ntc.anitracker.ui.details.episode
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -32,19 +31,18 @@ class EpisodesFragment : Fragment(R.layout.fragment_episodes) {
 
         val adapter = EpisodesAdapter(args.titleTextColor, args.bodyTextColor)
 
+        binding.apply {
+            rvEpisodes.adapter = adapter
+            rvEpisodes.setHasFixedSize(true)
+            rvEpisodes.layoutManager = LinearLayoutManager(requireContext())
+            rvEpisodes.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
+        }
+
         viewModel.getEpisodeInformation(args.malId).observe(viewLifecycleOwner, {
-            Log.d(TAG, "onViewCreated: SETTING RECYCLERVIEW")
             adapter.submitData(viewLifecycleOwner.lifecycle, it)
-            binding.apply {
-                rvEpisodes.adapter = adapter
-                rvEpisodes.setHasFixedSize(true)
-                rvEpisodes.layoutManager = LinearLayoutManager(requireContext())
-                rvEpisodes.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
-            }
         })
 
         binding.clEpisodes.setBackgroundColor(args.bgColor)
-        Log.d(TAG, "onViewCreated: CALLING API")
         viewModel.getEpisodeInformation(args.malId)
     }
 

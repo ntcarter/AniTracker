@@ -1,7 +1,7 @@
 package com.ntc.anitracker.api.models.episode
 
 data class Episode(
-    val aired: String,
+    val aired: String?,
     val episode_id: Int,
     val filler: Boolean,
     val forum_url: String,
