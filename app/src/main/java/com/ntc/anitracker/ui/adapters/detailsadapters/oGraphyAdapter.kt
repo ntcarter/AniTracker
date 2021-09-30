@@ -31,9 +31,6 @@ class oGraphyAdapter(
 
     inner class OGraphyViewHolder(private val binding: ItemImageTwoTextBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        init {
-
-        }
 
         fun bind(item: OGraphy) {
             binding.root.setOnClickListener {

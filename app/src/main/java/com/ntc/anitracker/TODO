@@ -1,14 +1,12 @@
 //TODO Implement a details screen for tapping on a cover based on if its an anime(done) or manga
 
-// TODO back buttons on character/details screens
-//TODO button functionality
-//TODO details UI
+//TODO back buttons on character/details screens
 //TODO ??back button? hide on scroll down and show on scroll up or at top?
 //TODO create landscape versions for most screens (especially details screens) or Disable landscape turning
 
 //TODO replace details image with image slider and api call (open a dialog to show other images)
 
-//TODO Add loading footers and headers
+//TODO Add loading footers and headers (progress bars)
 
 //TODO change UI recycler view to decoration and take into account screen width etc to show a certain
 //TODO number of covers on a screen at a time or change the preset size of the cover
@@ -22,7 +20,7 @@
 //TODO 9/16..etc load user score lists from MAL and other scoring sites?
 //TODO MAL/others integration
 
-//TODO ending and opening themes broken
+//TODO ending and opening themes broken (API BROKEN AS OF 9/30)
 
 //TODO Seasons
 //TODO searching
@@ -33,6 +31,7 @@
 
 //TODO check for things like socket time outs and auto refresh the request if timed out
 //TODO alertDialog UI changes (create light and dark themes and set them based on the one chosen by the user)
-//TODO the gallery images are a bit long
+//TODO need to calculate margins for the gallery image based on screen size.
 
 //TODO Anime detailsFragment UI changes. On smaller screens the text gets scrunched and overlaps
+//TODO add related anime and manga to details screen (button)

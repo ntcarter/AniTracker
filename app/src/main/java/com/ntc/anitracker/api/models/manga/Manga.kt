@@ -1,9 +1,13 @@
 package com.ntc.anitracker.api.models.manga
 
+
 data class Manga(
     val authors: List<Author>,
     val background: String,
-    val chapters: Any,
+    val chapters: Int,
+    val demographics: List<Demographic>,
+    val explicit_genres: List<Any>,
+    val external_links: List<ExternalLink>,
     val favorites: Int,
     val genres: List<Genre>,
     val image_url: String,
@@ -22,11 +26,12 @@ data class Manga(
     val serializations: List<Serialization>,
     val status: String,
     val synopsis: String,
+    val themes: List<Theme>,
     val title: String,
     val title_english: String,
     val title_japanese: String,
-    val title_synonyms: List<String>,
+    val title_synonyms: List<Any>,
     val type: String,
     val url: String,
-    val volumes: Any
+    val volumes: Int
 )

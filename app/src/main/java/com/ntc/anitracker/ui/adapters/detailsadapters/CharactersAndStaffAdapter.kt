@@ -10,11 +10,12 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.ntc.anitracker.R
 import com.ntc.anitracker.api.models.charactersandstaff.CharacterStaff
 import com.ntc.anitracker.databinding.ItemCharacterStaffBinding
+import com.ntc.anitracker.ui.details.charactersandstaff.CharactersAndStaffFragment
 
 class CharactersAndStaffAdapter(
     private val infoList: List<CharacterStaff>,
     val titleTextColor:Int,
-    val listener: CharacterStaffClick
+    val listener: CharactersAndStaffFragment
 ) : RecyclerView.Adapter<CharactersAndStaffAdapter.CharactersAndStaffViewHolder>() {
 
     override fun onCreateViewHolder(
@@ -66,7 +67,7 @@ class CharactersAndStaffAdapter(
 
                 // Voice actor recyclerView initialization
                 if (!character.voice_actors.isNullOrEmpty()) {
-                    rvVoiceActors.adapter = VoiceActorAdapter(character.voice_actors, titleTextColor)
+                    rvVoiceActors.adapter = VoiceActorAdapter(character.voice_actors, titleTextColor, listener)
                     if(character.voice_actors.size > 1){
                         rvVoiceActors.addItemDecoration(DividerItemDecoration(itemView.context, DividerItemDecoration.HORIZONTAL))
                     }

@@ -24,9 +24,8 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
             android:scaleType="centerCrop"
-            app:layout_constraintBottom_toTopOf="@+id/tvSynopsisText"
+            app:layout_constraintBottom_toBottomOf="@+id/tvStartedAiringText"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -159,7 +158,7 @@
             android:layout_marginTop="8dp"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/ivCover"
-            app:layout_constraintTop_toBottomOf="@+id/tvStartedAiringText"
+            app:layout_constraintTop_toBottomOf="@+id/tvAiringStartTime"
             tools:text="Finished Airing:" />
 
         <TextView
@@ -167,14 +166,17 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:textAlignment="center"
-            android:textSize="18sp"
+            android:layout_marginBottom="8dp"
+            android:textAlignment="textStart"
+            android:textSize="24sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/tvSynopsis"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvAiringEnd"
+            app:layout_constraintTop_toBottomOf="@+id/ivCover"
+            app:layout_constraintVertical_bias="1.0"
             tools:text="Synopsis: " />
 
         <TextView
@@ -188,7 +190,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvSynopsisText"
+            app:layout_constraintTop_toBottomOf="@+id/tvAiringEnd"
             tools:text="As a wild youth, elementary school student Shouya Ishida sought to beat boredom in the cruelest ways. When the deaf Shouko Nishimiya transfers into his class, Shouya and the rest of his class thoughtlessly bully her for fun. However, when her mother notifies the school, he is singled out and blamed for everything done to her. With Shouko transferring out of the school, Shouya is left at the mercy of his classmates. He is heartlessly ostracized all throughout elementary and middle school, while teachers turn a blind eye.  Now in his third year of high school, Shouya is still plagued by his wrongdoings as a young boy. Sincerely regretting his past actions, he sets out on a journey of redemption: to meet Shouko once more and make amends.  Koe no Katachi tells the heartwarming tale of Shouya's reunion with Shouko and his honest attempts to redeem himself, all while being continually haunted by the shadows of his past." />
 
         <TextView
@@ -320,21 +322,24 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
+            android:maxLines="1"
+            android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/tvAiringEnd"
-            app:layout_constraintTop_toBottomOf="@+id/tvPopularityText"
+            app:layout_constraintStart_toEndOf="@+id/ivCover"
+            app:layout_constraintTop_toBottomOf="@+id/tvStartedAiringText"
             tools:text="Sep 17, 2016" />
 
         <TextView
             android:id="@+id/tvAiringEnd"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            app:layout_constraintBottom_toBottomOf="@+id/tvFinishedAiringText"
+            android:maxLines="1"
+            android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/tvFinishedAiringText"
-            app:layout_constraintTop_toTopOf="@+id/tvFinishedAiringText"
+            app:layout_constraintStart_toEndOf="@+id/ivCover"
+            app:layout_constraintTop_toBottomOf="@+id/tvFinishedAiringText"
             tools:text="Sep 17, 2016" />
 
         <com.google.android.material.button.MaterialButton
@@ -344,6 +349,8 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvStudios"
@@ -356,6 +363,8 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btnCharactersAndStaff"
@@ -368,17 +377,29 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            app:layout_constraintBottom_toBottomOf="@+id/btnReviews"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_weight="66"
             app:layout_constraintStart_toEndOf="@+id/btnReviews"
             app:layout_constraintTop_toBottomOf="@+id/btnRecommendations"
             tools:text="Episode Information" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnReviews"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnEpisodeinfo"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_weight="33"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btnRecommendations"
             tools:text="Reviews" />

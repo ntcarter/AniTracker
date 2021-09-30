@@ -2,65 +2,53 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/clPersonDetails"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/ivPersonDetails"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginBottom="8dp"
         android:scaleType="fitStart"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerView3"
-        app:layout_constraintEnd_toStartOf="@+id/scrollView3"
+        app:layout_constraintBottom_toTopOf="@+id/svChipHolder"
+        app:layout_constraintEnd_toStartOf="@+id/svPersonDetails"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/test_image" />
+        tools:srcCompat="@drawable/test_image" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView3"
+        android:id="@+id/rvPersonDetails"
+        android:layout_width="395dp"
+        android:layout_height="326dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/svChipHolder">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <ScrollView
+        android:id="@+id/svPersonDetails"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/recyclerView4"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView4"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/recyclerView3"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView3" />
-
-    <ScrollView
-        android:id="@+id/scrollView3"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="4dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="4dp"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerView4"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/svChipHolder"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintStart_toEndOf="@+id/ivPersonDetails"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
@@ -69,7 +57,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/tvPersonDetailsName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
@@ -77,17 +65,99 @@
                 tools:text="Cook, Justin" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/tvPersonAltNames"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:layout_height="wrap_content" />
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/tvPersonBirthday"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tvPersonFamilyName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tvPersonGivenName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tvPersonDetailsAbout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
         </LinearLayout>
     </ScrollView>
+
+    <TextView
+        android:id="@+id/tvEmpty"
+        android:layout_width="395dp"
+        android:layout_height="326dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="center_vertical"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/svChipHolder"
+        tools:text="This Person Has No Voice Acting Roles" />
+
+    <HorizontalScrollView
+        android:id="@+id/svChipHolder"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toTopOf="@+id/rvPersonDetails"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/ivPersonDetails">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/cgPersonDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:checkedChip="@id/chipAnimeography"
+            app:selectionRequired="true"
+            app:singleLine="true"
+            app:singleSelection="true">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipVARoles"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:checked="true"
+                android:text="Voice Acting Roles"
+                android:textAlignment="viewStart"
+                app:checkedIconVisible="false" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipAnimePositons"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:text="Anime Staff Positions"
+                android:textAlignment="viewStart"
+                app:checkedIconVisible="false" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipPublishedManga"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:text="Published Manga"
+                android:textAlignment="viewStart"
+                app:checkedIconVisible="false" />
+        </com.google.android.material.chip.ChipGroup>
+    </HorizontalScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

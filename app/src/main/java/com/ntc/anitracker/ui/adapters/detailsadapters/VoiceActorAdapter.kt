@@ -11,7 +11,8 @@ import com.ntc.anitracker.databinding.ItemImageTwoTextBinding
 
 class VoiceActorAdapter(
     private val voiceActorList: List<VoiceActor>,
-    val textColor: Int
+    val textColor: Int,
+    val listener: OnVoiceClick
 ) : RecyclerView.Adapter<VoiceActorAdapter.VoiceActorViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VoiceActorViewHolder {
@@ -29,10 +30,19 @@ class VoiceActorAdapter(
         return voiceActorList.size
     }
 
+    interface OnVoiceClick {
+        fun onVoiceActorClick(personId: Int)
+    }
+
     inner class VoiceActorViewHolder(private val binding: ItemImageTwoTextBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(voiceActor: VoiceActor) {
             binding.apply {
+
+                root.setOnClickListener {
+                    listener.onVoiceActorClick(voiceActor.mal_id)
+                }
+
                 Glide.with(itemView)
                     .load(voiceActor.image_url)
                     .centerCrop()

@@ -152,4 +152,6 @@ class JikanRepository @Inject constructor(private val jikanAPI: JikanAPI) {
 
     suspend fun getRecommendations(malId: Int) = jikanAPI.getRecommendations(malId)
 
+    suspend fun getPersonDetails(personId: Int) = jikanAPI.getPersonDetails(personId)
+
 }

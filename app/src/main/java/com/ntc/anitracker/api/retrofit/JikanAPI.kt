@@ -4,6 +4,7 @@ import com.ntc.anitracker.api.models.anime.Anime
 import com.ntc.anitracker.api.models.characterdetails.CharacterDetails
 import com.ntc.anitracker.api.models.charactersandstaff.CharactersAndStaff
 import com.ntc.anitracker.api.models.episode.EpisodeInfo
+import com.ntc.anitracker.api.models.person.Person
 import com.ntc.anitracker.api.models.recommendations.Recommendations
 import com.ntc.anitracker.api.models.reviews.Reviews
 import com.ntc.anitracker.api.models.topanime.TopAnime
@@ -118,6 +119,11 @@ interface JikanAPI {
     suspend fun getCharacterDetails(
         @Path("id") id: Int
     ): CharacterDetails
+
+    @GET("/v3/person/{id}")
+    suspend fun getPersonDetails(
+        @Path("id") id: Int
+    ): Person
 
 //    suspend fun searchAnime(
 //        @Query("query") query: String,

@@ -22,7 +22,7 @@ private const val TAG = "CharacterDetails"
 
 @AndroidEntryPoint
 class CharacterDetailsFragment : Fragment(R.layout.fragment_character_details),
-    oGraphyAdapter.OnOgraphyClick {
+    oGraphyAdapter.OnOgraphyClick, VoiceActorAdapter.OnVoiceClick {
 
     private val args by navArgs<CharacterDetailsFragmentArgs>()
 
@@ -67,11 +67,16 @@ class CharacterDetailsFragment : Fragment(R.layout.fragment_character_details),
 
             // Voice actor recyclerView
             val voiceActorAdapter =
-                VoiceActorAdapter(characterDetails.voice_actors, args.titleTextColor)
+                VoiceActorAdapter(characterDetails.voice_actors, args.titleTextColor, this@CharacterDetailsFragment)
             rvVoiceActor.layoutManager = LinearLayoutManager(requireContext())
             rvVoiceActor.setHasFixedSize(true)
             rvVoiceActor.adapter = voiceActorAdapter
-            rvVoiceActor.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
+            rvVoiceActor.addItemDecoration(
+                DividerItemDecoration(
+                    requireContext(),
+                    DividerItemDecoration.VERTICAL
+                )
+            )
 
             // animeography/mangaography recyclerView
             val animeAdapter = oGraphyAdapter(
@@ -91,13 +96,16 @@ class CharacterDetailsFragment : Fragment(R.layout.fragment_character_details),
             rvOgraphy.layoutManager = LinearLayoutManager(requireContext())
             rvOgraphy.setHasFixedSize(true)
             rvOgraphy.adapter = animeAdapter // setting default selection
-            rvOgraphy.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
+            rvOgraphy.addItemDecoration(
+                DividerItemDecoration(
+                    requireContext(),
+                    DividerItemDecoration.VERTICAL
+                )
+            )
 
             cgCharacterDetails.setOnCheckedChangeListener { _, _ ->
                 if (chipAnimeography.isChecked) {
-                    binding.apply {
-                        rvOgraphy.adapter = animeAdapter
-                    }
+                    rvOgraphy.adapter = animeAdapter
                 } else {
                     rvOgraphy.adapter = mangaAdapter
                 }
@@ -145,6 +153,18 @@ class CharacterDetailsFragment : Fragment(R.layout.fragment_character_details),
         val action =
             CharacterDetailsFragmentDirections.actionCharacterDetailsFragmentToAnimeDetailsFragment(
                 malId
+            )
+        findNavController().navigate(action)
+    }
+
+    override fun onVoiceActorClick(personId: Int) {
+        val action =
+            CharacterDetailsFragmentDirections.actionCharacterDetailsFragmentToPersonDetailsFragment(
+                personId,
+                args.titleTextColor,
+                args.bodyTextColor,
+                args.bgColor,
+                args.buttonColor
             )
         findNavController().navigate(action)
     }

@@ -239,6 +239,8 @@ class AnimeDetailsFragment : Fragment(R.layout.fragment_anime_details) {
 
             var openings = ""
             val openingsList = animeInfo.opening_themes
+
+            Log.d(TAG, "bindUI: ${animeInfo.opening_themes}")
             for (opening in openingsList) {
                 if (opening != openingsList[openingsList.size - 1]) {
                     openings += "$opening, \n\n"
@@ -246,6 +248,7 @@ class AnimeDetailsFragment : Fragment(R.layout.fragment_anime_details) {
                     openings += opening
                 }
             }
+            Log.d(TAG, "bindUI: OPENINGS: $openings")
             tvOpeningThemes.text = openings
 
             var endings = ""

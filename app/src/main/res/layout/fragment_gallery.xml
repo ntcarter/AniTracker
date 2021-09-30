@@ -20,10 +20,9 @@
         android:id="@+id/scroll_view_anime"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/gradient_gallery"
         android:elevation="1dp"
         android:scrollbars="none"
-        android:background="@drawable/gradient_gallery"
-
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">

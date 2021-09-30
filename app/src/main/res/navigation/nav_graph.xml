@@ -105,6 +105,15 @@
         <argument
             android:name="bgColor"
             app:argType="integer" />
+        <argument
+            android:name="buttonColor"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_personDetailsFragment_to_characterDetailsFragment"
+            app:destination="@id/characterDetailsFragment" />
+        <action
+            android:id="@+id/action_personDetailsFragment_to_animeDetailsFragment"
+            app:destination="@id/animeDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/recomendationsFragment"

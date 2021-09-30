@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/clImageTwoText"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/ivVoiceActor"
+        android:id="@+id/ivStaffPosition"
         android:layout_width="40dp"
         android:layout_height="60dp"
         android:layout_marginStart="8dp"
@@ -20,29 +20,32 @@
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/tvVAName"
-        android:layout_width="wrap_content"
+        android:id="@+id/tvAnimeStaffName"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:ellipsize="end"
         android:maxLines="1"
         app:layout_constrainedWidth="true"
-        app:layout_constraintBottom_toTopOf="@+id/tvVALang"
+        app:layout_constraintBottom_toTopOf="@+id/tvAnimeStaffRole"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ivVoiceActor"
+        app:layout_constraintStart_toEndOf="@+id/ivStaffPosition"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="This is their name" />
 
     <TextView
-        android:id="@+id/tvVALang"
-        android:layout_width="wrap_content"
+        android:id="@+id/tvAnimeStaffRole"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        app:layout_constrainedWidth="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ivVoiceActor"
-        app:layout_constraintTop_toBottomOf="@+id/tvVAName"
+        app:layout_constraintStart_toEndOf="@+id/ivStaffPosition"
+        app:layout_constraintTop_toBottomOf="@+id/tvAnimeStaffName"
         tools:text="English" />
 </androidx.constraintlayout.widget.ConstraintLayout>
