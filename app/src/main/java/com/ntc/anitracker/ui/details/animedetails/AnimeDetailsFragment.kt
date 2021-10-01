@@ -166,8 +166,7 @@ class AnimeDetailsFragment : Fragment(R.layout.fragment_anime_details) {
                 btnEpisodeinfo.setTextColor(titleTextColor.rgb)
                 btnReviews.setTextColor(titleTextColor.rgb)
                 btnRecommendations.setTextColor(titleTextColor.rgb)
-            }else {
-                Log.d(TAG, "updateColors: NULLNULLLLLLL")
+                btnRelated.setTextColor(titleTextColor.rgb)
             }
 
             if (buttonColor != null) {
@@ -176,6 +175,7 @@ class AnimeDetailsFragment : Fragment(R.layout.fragment_anime_details) {
                 btnEpisodeinfo.setBackgroundColor(buttonColor.rgb)
                 btnReviews.setBackgroundColor(buttonColor.rgb)
                 btnRecommendations.setBackgroundColor(buttonColor.rgb)
+                btnRelated.setBackgroundColor(buttonColor.rgb)
             }
 
             bindUI(animeInfo)
@@ -213,6 +213,7 @@ class AnimeDetailsFragment : Fragment(R.layout.fragment_anime_details) {
             tvOpeningsText.text = "Opening Themes:"
             tvEndingsText.text = "Ending Themes:"
             tvStudiosText.text = "Studios:"
+            tvMyScore.text = "--"
             btnCharactersAndStaff.text = "Characters And Staff Information"
             btnRecommendations.text = "Recommendations"
             btnReviews.text = "Reviews"
@@ -248,7 +249,6 @@ class AnimeDetailsFragment : Fragment(R.layout.fragment_anime_details) {
                     openings += opening
                 }
             }
-            Log.d(TAG, "bindUI: OPENINGS: $openings")
             tvOpeningThemes.text = openings
 
             var endings = ""
@@ -310,7 +310,6 @@ class AnimeDetailsFragment : Fragment(R.layout.fragment_anime_details) {
                 findNavController().navigate(action)
             }
 
-            Log.d(TAG, "bindUI: TEXTTITLE COLOR: $textTitleColor")
             btnReviews.setOnClickListener {
                 val action =
                     AnimeDetailsFragmentDirections.actionAnimeDetailsFragmentToFragmentReviews(
@@ -318,6 +317,17 @@ class AnimeDetailsFragment : Fragment(R.layout.fragment_anime_details) {
                         textTitleColor,
                         textBodyColor,
                         true,
+                        bgColor
+                    )
+                findNavController().navigate(action)
+            }
+
+            btnRelated.setOnClickListener {
+                val action =
+                    AnimeDetailsFragmentDirections.actionAnimeDetailsFragmentToRelatedFragment(
+                        animeInfo.related,
+                        textTitleColor,
+                        textBodyColor,
                         bgColor
                     )
                 findNavController().navigate(action)

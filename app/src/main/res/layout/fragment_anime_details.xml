@@ -365,7 +365,9 @@
             android:layout_marginEnd="8dp"
             android:ellipsize="end"
             android:maxLines="1"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnRelated"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_weight="66"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btnCharactersAndStaff"
             tools:text="Recommendations" />
@@ -424,6 +426,20 @@
             app:layout_constraintStart_toEndOf="@+id/tvPopularityText"
             app:layout_constraintTop_toBottomOf="@+id/tvEpisodeCount"
             tools:text="45" />
+
+        <Button
+            android:id="@+id/btnRelated"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="Related"
+            app:layout_constraintBottom_toBottomOf="@+id/btnRecommendations"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_weight="33"
+            app:layout_constraintStart_toEndOf="@+id/btnRecommendations"
+            app:layout_constraintTop_toBottomOf="@+id/btnCharactersAndStaff" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
