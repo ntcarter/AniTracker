@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.ntc.anitracker.R
-import com.ntc.anitracker.api.models.anime.Anime
 import com.ntc.anitracker.api.models.topanime.TopA
 import com.ntc.anitracker.databinding.ItemGalleryBinding
 
@@ -32,7 +31,7 @@ class GalleryAnimeAdapter(
     }
 
     interface OnItemClickListener {
-        fun onCoverClick(anime: TopA)
+        fun onAnimeCoverClick(anime: TopA)
     }
 
     inner class TopAnimeViewHolder(private val binding: ItemGalleryBinding) :
@@ -46,7 +45,7 @@ class GalleryAnimeAdapter(
                     .into(imageCover)
 
                 imageCover.setOnClickListener {
-                    listener.onCoverClick(top)
+                    listener.onAnimeCoverClick(top)
                 }
 
                 titleText.text = top.title

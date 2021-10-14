@@ -1,37 +1,38 @@
-//TODO Implement a details screen for tapping on a cover based on if its an anime(done) or manga
+//TODO change UI recycler view to decoration and take into account screen width etc to show a certain number of gallery items
+//TODO need to calculate margins for the gallery image based on screen size.
+//TODO move the starting position down on the gallery recycler view
 
-//TODO back buttons on character/details screens
-//TODO ??back button? hide on scroll down and show on scroll up or at top?
-//TODO create landscape versions for most screens (especially details screens) or Disable landscape turning
-
-//TODO replace details image with image slider and api call (open a dialog to show other images)
 
 //TODO Add loading footers and headers (progress bars)
 
-//TODO change UI recycler view to decoration and take into account screen width etc to show a certain
-//TODO number of covers on a screen at a time or change the preset size of the cover
 
-//TODO move the starting position down on the gallery recycler view
+//TODO Add a button to make going back to the gallery or searching easy or going back one screen.
+//TODO ??back button? hide on scroll down and show on scroll up or at top?
+//TODO Add a fab to any page with custom colors that allows for disabling of custom color for hard to read color combos
+//TODO alertDialog UI changes (create light and dark themes and set them based on the one chosen by the user)
 
-//TODO hide buttons on scroll down (gallery) show on scroll up
+
+//TODO SOMETIMES UI never loads. Need to check and recall api if that happens or an error happens
+//TODO deal with OkHttpClient: <-- HTTP FAILED: java.net.SocketTimeoutException: timeout this crashes the app (can happen at any api call)
+//TODO check for things like socket time outs and auto refresh the request if timed out
+//TODO if no internet, when internet is reconnected call api.
+
+//TODO Seasons
+//TODO searching
+
+
+//TODO Anime detailsFragment UI changes. On smaller screens the text gets scrunched and overlaps
+//TODO add related anime and manga to details screen (button)
+//TODO change the airing/publishing end time to currently airing/publishing if the media is currently airing/publishing in anime/manga details
+//TODO when going back to the gallery from details screen switching from one type (anime or manga) to another wont auto select a chip
+
 
 //TODO User score? add a spot for user scores on the cover/details
 //TODO Add and track user scores in a DB
 //TODO 9/16..etc load user score lists from MAL and other scoring sites?
-//TODO MAL/others integration
-
-//TODO ending and opening themes broken (API BROKEN AS OF 9/30)
-
-//TODO Seasons
-//TODO searching
+//TODO MAL/others integration. LOGIN SCREEN
 //TODO Load from room instead of calls in certain situations? things that don't change often like top scored anime
-//TODO if the API or MAL lags too (or is down) much a call will return a 503 error. Might want to do something about that specifically
 
-//TODO Add a fab to any page with custom colors that allows for disabling of custom color for hard to read color combos
 
-//TODO check for things like socket time outs and auto refresh the request if timed out
-//TODO alertDialog UI changes (create light and dark themes and set them based on the one chosen by the user)
-//TODO need to calculate margins for the gallery image based on screen size.
-
-//TODO Anime detailsFragment UI changes. On smaller screens the text gets scrunched and overlaps
-//TODO add related anime and manga to details screen (button)
+//TODO general learn junit and espresso ui testing
+//TODO UI TEST DIFFERENT SIZES

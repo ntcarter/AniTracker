@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_galleryFragment_to_animeDetailsFragment"
             app:destination="@id/animeDetailsFragment" />
+        <action
+            android:id="@+id/action_galleryFragment_to_mangaDetailsFragment"
+            app:destination="@id/mangaDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/animeDetailsFragment"
@@ -44,7 +47,7 @@
         android:label="CharactersAndStaffFragment"
         tools:layout="@layout/fragment_characters_staff">
         <argument
-            android:name="animeId"
+            android:name="malId"
             app:argType="integer" />
         <argument
             android:name="titleTextColor"
@@ -64,6 +67,9 @@
         <action
             android:id="@+id/action_charactersAndStaffFragment_to_personDetailsFragment"
             app:destination="@id/personDetailsFragment" />
+        <argument
+            android:name="mediaType"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/characterDetailsFragment"
@@ -91,6 +97,9 @@
         <action
             android:id="@+id/action_characterDetailsFragment_to_personDetailsFragment"
             app:destination="@id/personDetailsFragment" />
+        <action
+            android:id="@+id/action_characterDetailsFragment_to_mangaDetailsFragment"
+            app:destination="@id/mangaDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/personDetailsFragment"
@@ -117,6 +126,9 @@
         <action
             android:id="@+id/action_personDetailsFragment_to_animeDetailsFragment"
             app:destination="@id/animeDetailsFragment" />
+        <action
+            android:id="@+id/action_personDetailsFragment_to_mangaDetailsFragment"
+            app:destination="@id/mangaDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/recomendationsFragment"
@@ -144,6 +156,9 @@
         <argument
             android:name="title"
             app:argType="string" />
+        <action
+            android:id="@+id/action_recomendationsFragment_to_mangaDetailsFragment"
+            app:destination="@id/mangaDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/episodesFragment"
@@ -200,5 +215,32 @@
         <action
             android:id="@+id/action_relatedFragment_to_animeDetailsFragment"
             app:destination="@id/animeDetailsFragment" />
+        <action
+            android:id="@+id/action_relatedFragment_to_mangaDetailsFragment"
+            app:destination="@id/mangaDetailsFragment" />
+        <argument
+            android:name="isAnime"
+            app:argType="boolean" />
+    </fragment>
+    <fragment
+        android:id="@+id/mangaDetailsFragment"
+        android:name="com.ntc.anitracker.ui.details.mangadetails.MangaDetailsFragment"
+        android:label="MangaDetailsFragment"
+        tools:layout="@layout/fragment_manga_details">
+        <argument
+            android:name="malId"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_mangaDetailsFragment_to_charactersAndStaffFragment"
+            app:destination="@id/charactersAndStaffFragment" />
+        <action
+            android:id="@+id/action_mangaDetailsFragment_to_recomendationsFragment"
+            app:destination="@id/recomendationsFragment" />
+        <action
+            android:id="@+id/action_mangaDetailsFragment_to_fragmentReviews"
+            app:destination="@id/fragmentReviews" />
+        <action
+            android:id="@+id/action_mangaDetailsFragment_to_relatedFragment"
+            app:destination="@id/relatedFragment" />
     </fragment>
 </navigation>

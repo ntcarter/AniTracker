@@ -17,13 +17,14 @@ import com.ntc.anitracker.databinding.FragmentPersonDetailsBinding
 import com.ntc.anitracker.ui.adapters.detailsadapters.AnimeStaffPositionsAdapter
 import com.ntc.anitracker.ui.adapters.detailsadapters.PublishedMangaAdapter
 import com.ntc.anitracker.ui.adapters.detailsadapters.VoiceRolesAdapter
+import com.ntc.anitracker.ui.details.dialog.PictureDetailsDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 private const val TAG = "PersonDetailsFragment"
 
 @AndroidEntryPoint
 class PersonDetailsFragment : Fragment(R.layout.fragment_person_details),
-    VoiceRolesAdapter.OnPersonDetailsClick {
+    VoiceRolesAdapter.OnPersonDetailsClick, PictureDetailsDialogFragment.OnDialogState {
 
     private val args by navArgs<PersonDetailsFragmentArgs>()
 
@@ -31,6 +32,10 @@ class PersonDetailsFragment : Fragment(R.layout.fragment_person_details),
     private val binding get() = _binding!!
 
     private val viewModel: PersonDetailsViewModel by viewModels()
+
+    // Holds the state of an active image dialog. If true there's an active dialog currently showing
+    private var dialogState = false
+    private var apiState = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -179,6 +184,26 @@ class PersonDetailsFragment : Fragment(R.layout.fragment_person_details),
                     }
                 }
             }
+
+            ivPersonDetails.setOnClickListener {
+                // set up the observer
+                viewModel.images.observe(viewLifecycleOwner, {
+                    // create the dialog with the image data
+                    if (it != null && !dialogState) {
+                        val dialog =
+                            PictureDetailsDialogFragment(it.pictures, this@PersonDetailsFragment)
+                        dialog.show(parentFragmentManager, "dialog")
+                        dialogState =
+                            true // lock the observer out of making anymore dialogs while one is open
+                    }
+                })
+
+                // make the api call
+                if (!apiState) {
+                    apiState = true
+                    viewModel.getPersonImageData(args.personId)
+                }
+            }
         }
     }
 
@@ -233,6 +258,11 @@ class PersonDetailsFragment : Fragment(R.layout.fragment_person_details),
                 args.buttonColor
             )
         findNavController().navigate(action)
+    }
+
+    override fun onDialogDismiss() {
+        dialogState = false // unlock the ability for the fragment to create a new dialog
+        apiState = false // Unlock the ability to make another image api call
     }
 
     override fun onDestroyView() {

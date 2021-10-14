@@ -26,19 +26,27 @@ class RelatedFragment : Fragment(R.layout.fragment_related), RelatedAdapter.OnRe
 
         val combinedRelatedList = combineRelated()
 
-        binding.clRelated.setBackgroundColor(args.bgColor)
-
         binding.apply {
-            rvRelated.adapter =
-                RelatedAdapter(combinedRelatedList, args.titleTextColor, this@RelatedFragment)
-            rvRelated.layoutManager = LinearLayoutManager(requireContext())
-            rvRelated.setHasFixedSize(true)
-            rvRelated.addItemDecoration(
-                DividerItemDecoration(
-                    requireContext(),
-                    DividerItemDecoration.VERTICAL
+            clRelated.setBackgroundColor(args.bgColor)
+            tvRelatedEmpty.setTextColor(args.titleTextColor)
+
+            if(!combinedRelatedList.isNullOrEmpty()) {
+                rvRelated.adapter =
+                    RelatedAdapter(combinedRelatedList, args.titleTextColor, this@RelatedFragment)
+                rvRelated.layoutManager = LinearLayoutManager(requireContext())
+                rvRelated.setHasFixedSize(true)
+                rvRelated.addItemDecoration(
+                    DividerItemDecoration(
+                        requireContext(),
+                        DividerItemDecoration.VERTICAL
+                    )
                 )
-            )
+                rvRelated.visibility = View.VISIBLE
+                tvRelatedEmpty.visibility = View.GONE
+            } else {
+                rvRelated.visibility = View.GONE
+                tvRelatedEmpty.visibility = View.VISIBLE
+            }
         }
     }
 

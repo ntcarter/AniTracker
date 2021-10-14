@@ -3,7 +3,6 @@ package com.ntc.anitracker.ui.details.animedetails
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -18,6 +17,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.ntc.anitracker.R
 import com.ntc.anitracker.api.models.anime.Anime
 import com.ntc.anitracker.databinding.FragmentAnimeDetailsBinding
+import com.ntc.anitracker.ui.details.dialog.PictureDetailsDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -25,7 +25,8 @@ import kotlinx.coroutines.launch
 private const val TAG = "AnimeDetailsFragment"
 
 @AndroidEntryPoint
-class AnimeDetailsFragment : Fragment(R.layout.fragment_anime_details) {
+class AnimeDetailsFragment : Fragment(R.layout.fragment_anime_details),
+    PictureDetailsDialogFragment.OnDialogState {
 
     private val args by navArgs<AnimeDetailsFragmentArgs>()
 
@@ -33,6 +34,10 @@ class AnimeDetailsFragment : Fragment(R.layout.fragment_anime_details) {
 
     private var _binding: FragmentAnimeDetailsBinding? = null
     private val binding get() = _binding!!
+
+    // Holds the state of an active image dialog. If true there's an active dialog currently showing
+    private var dialogState = false
+    private var apiState = false
 
     private var textBodyColor: Int = 0
     private var bgColor: Int = 0
@@ -53,11 +58,11 @@ class AnimeDetailsFragment : Fragment(R.layout.fragment_anime_details) {
             viewModel.getAnimeData(args.malId)
         } else {
             // anime already has a value use that to bind instead of an api call
-            // happens for things like screen rotations
+            // occurs on process death like screen rotations
             loadImage(viewModel.anime.value!!)
         }
 
-        // sometimes the UI doesn't update wait 5 seconds and if the default values are still active, update
+        // sometimes the UI doesn't update if the network lags wait 5 seconds and if the default values are still active, update
         lifecycleScope.launch {
             delay(3000)
             if (_binding != null && binding.tvAnimeNameEn.text == "Loading") {
@@ -101,7 +106,7 @@ class AnimeDetailsFragment : Fragment(R.layout.fragment_anime_details) {
         Palette.from(bitmap).generate() { palette ->
             if (palette != null) {
                 updateColors(
-                    palette.lightMutedSwatch,
+                    palette.lightMutedSwatch ?: palette.mutedSwatch,
                     palette.darkMutedSwatch,
                     // sometimes the palette will not return a vibrantSwatch
                     palette.vibrantSwatch ?: palette.mutedSwatch,
@@ -227,51 +232,10 @@ class AnimeDetailsFragment : Fragment(R.layout.fragment_anime_details) {
             tvAnimeNameJp.setOnClickListener(listener)
             tvSynopsis.text = animeInfo.synopsis
 
-            var studios = ""
-            val studioList = animeInfo.studios
-            for (studio in studioList) {
-                if (studio != studioList[studioList.size - 1]) {
-                    studios += "${studio.name}, "
-                } else { // last element
-                    studios += studio.name
-                }
-            }
-            tvStudios.text = studios
-
-            var openings = ""
-            val openingsList = animeInfo.opening_themes
-
-            Log.d(TAG, "bindUI: ${animeInfo.opening_themes}")
-            for (opening in openingsList) {
-                if (opening != openingsList[openingsList.size - 1]) {
-                    openings += "$opening, \n\n"
-                } else { // last element
-                    openings += opening
-                }
-            }
-            tvOpeningThemes.text = openings
-
-            var endings = ""
-            val endingsList = animeInfo.ending_themes
-            for (ending in endingsList) {
-                if (ending != endingsList[endingsList.size - 1]) {
-                    endings += "$ending, \n\n"
-                } else { // last element
-                    endings += ending
-                }
-            }
-            tvEndingThemes.text = endings
-
-            var genres = ""
-            val genresList = animeInfo.genres
-            for (genre in genresList) {
-                if (genre.name != genresList[genresList.size - 1].name) {
-                    genres += "${genre.name}, "
-                } else { // last element
-                    genres += genre.name
-                }
-            }
-            tvGenres.text = genres
+            tvStudios.text = viewModel.getStudioList(animeInfo.studios)
+            tvOpeningThemes.text = viewModel.getOpeningsList(animeInfo.opening_themes)
+            tvEndingThemes.text = viewModel.getOpeningsList(animeInfo.ending_themes)
+            tvGenres.text = viewModel.getGenreList(animeInfo.genres)
 
             // buttons
             btnCharactersAndStaff.setOnClickListener {
@@ -281,7 +245,8 @@ class AnimeDetailsFragment : Fragment(R.layout.fragment_anime_details) {
                         textTitleColor,
                         textBodyColor,
                         btnColor,
-                        bgColor
+                        bgColor,
+                        "anime"
                     )
                 findNavController().navigate(action)
             }
@@ -328,9 +293,30 @@ class AnimeDetailsFragment : Fragment(R.layout.fragment_anime_details) {
                         animeInfo.related,
                         textTitleColor,
                         textBodyColor,
-                        bgColor
+                        bgColor,
+                        true
                     )
                 findNavController().navigate(action)
+            }
+
+            ivCover.setOnClickListener {
+                // set up the observer
+                viewModel.images.observe(viewLifecycleOwner, {
+                    // create the dialog with the image data
+                    if (it != null && !dialogState) {
+                        val dialog =
+                            PictureDetailsDialogFragment(it.pictures, this@AnimeDetailsFragment)
+                        dialog.show(parentFragmentManager, "dialog")
+                        dialogState =
+                            true // lock the observer out of making anymore dialogs while one is open
+                    }
+                })
+
+                // make the api call
+                if (!apiState) {
+                    apiState = true
+                    viewModel.getAnimeImageData(args.malId)
+                }
             }
         }
     }
@@ -348,6 +334,11 @@ class AnimeDetailsFragment : Fragment(R.layout.fragment_anime_details) {
             .setPositiveButton("Close") { _, _ -> }
             .create()
         dialog.show()
+    }
+
+    override fun onDialogDismiss() {
+        dialogState = false // unlock the ability for the fragment to create a new dialog
+        apiState = false // Unlock the ability to make another image api call
     }
 
     override fun onDestroyView() {

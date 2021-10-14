@@ -21,11 +21,15 @@ class RecViewModel @Inject constructor(
     val recDetails: LiveData<Recommendations?>
         get() = _recDetails
 
-    fun getRecommendations(malId: Int) {
+    fun getRecommendations(malId: Int, isAnime: Boolean) {
         var recommendations: Recommendations?
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                recommendations = repository.getRecommendations(malId)
+                recommendations = if(isAnime){
+                    repository.getAnimeRecommendations(malId)
+                } else {
+                    repository.getMangaRecommendations(malId)
+                }
                 _recDetails.postValue(recommendations)
             } catch (e: HttpException) {
             }

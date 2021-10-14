@@ -150,8 +150,21 @@ class JikanRepository @Inject constructor(private val jikanAPI: JikanAPI) {
 
     suspend fun getCharacterDetails(characterId: Int) = jikanAPI.getCharacterDetails(characterId)
 
-    suspend fun getRecommendations(malId: Int) = jikanAPI.getRecommendations(malId)
+    suspend fun getAnimeRecommendations(malId: Int) = jikanAPI.getAnimeRecommendations(malId)
 
     suspend fun getPersonDetails(personId: Int) = jikanAPI.getPersonDetails(personId)
 
+    suspend fun getMangaDataFromJikan(malId: Int) = jikanAPI.getMangaData(malId)
+
+    suspend fun getMangaCharacters(malId: Int) = jikanAPI.getMangaCharacters(malId)
+
+    suspend fun getMangaRecommendations(malId: Int) = jikanAPI.getMangaRecommendations(malId)
+
+    suspend fun getAnimeImageDataFromJikan(malId: Int) = jikanAPI.getAnimeImageData(malId)
+
+    suspend fun getMangaImageDataFromJikan(malId: Int) = jikanAPI.getMangaImageData(malId)
+
+    suspend fun getPersonImageDataFromJikan(malId: Int) = jikanAPI.getPersonImageData(malId)
+
+    suspend fun getCharacterImageDataFromJikan(malId: Int) = jikanAPI.getCharacterImageData(malId)
 }

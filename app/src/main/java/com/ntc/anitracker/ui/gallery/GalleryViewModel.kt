@@ -1,11 +1,15 @@
 package com.ntc.anitracker.ui.gallery
 
-import androidx.lifecycle.*
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.switchMap
+import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import com.ntc.anitracker.data.JikanRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
+private const val TAG = "GalleryViewModel"
 @HiltViewModel
 class GalleryViewModel @Inject constructor(
     private val repository: JikanRepository

@@ -16,13 +16,15 @@ import com.ntc.anitracker.api.models.characterdetails.CharacterDetails
 import com.ntc.anitracker.databinding.FragmentCharacterDetailsBinding
 import com.ntc.anitracker.ui.adapters.detailsadapters.VoiceActorAdapter
 import com.ntc.anitracker.ui.adapters.detailsadapters.oGraphyAdapter
+import com.ntc.anitracker.ui.details.dialog.PictureDetailsDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 private const val TAG = "CharacterDetails"
 
 @AndroidEntryPoint
 class CharacterDetailsFragment : Fragment(R.layout.fragment_character_details),
-    oGraphyAdapter.OnOgraphyClick, VoiceActorAdapter.OnVoiceClick {
+    oGraphyAdapter.OnOgraphyClick, VoiceActorAdapter.OnVoiceClick,
+    PictureDetailsDialogFragment.OnDialogState {
 
     private val args by navArgs<CharacterDetailsFragmentArgs>()
 
@@ -30,6 +32,10 @@ class CharacterDetailsFragment : Fragment(R.layout.fragment_character_details),
     private val binding get() = _binding!!
 
     private val viewModel: CharacterDetailsViewModel by viewModels()
+
+    // Holds the state of an active image dialog. If true there's an active dialog currently showing
+    private var dialogState = false
+    private var apiState = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -59,24 +65,40 @@ class CharacterDetailsFragment : Fragment(R.layout.fragment_character_details),
             tvNameEN.text = characterDetails.name
             tvNameEN.setTextColor(args.titleTextColor)
 
-            tvNameJp.text = "(${characterDetails.name_kanji})"
-            tvNameJp.setTextColor(args.titleTextColor)
+            if (characterDetails.name_kanji != null) {
+                tvNameJp.text = "(${characterDetails.name_kanji})"
+                tvNameJp.setTextColor(args.titleTextColor)
+            }
 
             tvCharDescription.text = characterDetails.about
             tvCharDescription.setTextColor(args.bodyTextColor)
 
-            // Voice actor recyclerView
-            val voiceActorAdapter =
-                VoiceActorAdapter(characterDetails.voice_actors, args.titleTextColor, this@CharacterDetailsFragment)
-            rvVoiceActor.layoutManager = LinearLayoutManager(requireContext())
-            rvVoiceActor.setHasFixedSize(true)
-            rvVoiceActor.adapter = voiceActorAdapter
-            rvVoiceActor.addItemDecoration(
-                DividerItemDecoration(
-                    requireContext(),
-                    DividerItemDecoration.VERTICAL
+            tvCharEmptyVA.setTextColor(args.titleTextColor)
+
+            if (!characterDetails.voice_actors.isNullOrEmpty()) {
+                // Voice actor recyclerView
+                val voiceActorAdapter =
+                    VoiceActorAdapter(
+                        characterDetails.voice_actors,
+                        args.titleTextColor,
+                        this@CharacterDetailsFragment
+                    )
+                rvVoiceActor.layoutManager = LinearLayoutManager(requireContext())
+                rvVoiceActor.setHasFixedSize(true)
+                rvVoiceActor.adapter = voiceActorAdapter
+                rvVoiceActor.addItemDecoration(
+                    DividerItemDecoration(
+                        requireContext(),
+                        DividerItemDecoration.VERTICAL
+                    )
                 )
-            )
+                rvVoiceActor.visibility = View.VISIBLE
+                tvCharEmptyVA.visibility = View.INVISIBLE
+            } else {
+                rvVoiceActor.visibility = View.INVISIBLE
+                tvCharEmptyVA.visibility = View.VISIBLE
+            }
+
 
             // animeography/mangaography recyclerView
             val animeAdapter = oGraphyAdapter(
@@ -108,6 +130,25 @@ class CharacterDetailsFragment : Fragment(R.layout.fragment_character_details),
                     rvOgraphy.adapter = animeAdapter
                 } else {
                     rvOgraphy.adapter = mangaAdapter
+                }
+            }
+
+            ivChar.setOnClickListener {
+                viewModel.images.observe(viewLifecycleOwner, {
+                    // create the dialog with the image data
+                    if (it != null && !dialogState) {
+                        val dialog =
+                            PictureDetailsDialogFragment(it.pictures, this@CharacterDetailsFragment)
+                        dialog.show(parentFragmentManager, "dialog")
+                        dialogState =
+                            true // lock the observer out of making anymore dialogs while one is open
+                    }
+                })
+
+                // make the api call
+                if (!apiState) {
+                    apiState = true
+                    viewModel.getCharacterImageData(args.characterId)
                 }
             }
         }
@@ -146,7 +187,11 @@ class CharacterDetailsFragment : Fragment(R.layout.fragment_character_details),
     }
 
     override fun onMangaographyCLick(malId: Int) {
-//        TODO("Not yet implemented") goes to manga page (not yet implemented)
+        val action =
+            CharacterDetailsFragmentDirections.actionCharacterDetailsFragmentToMangaDetailsFragment(
+                malId
+            )
+        findNavController().navigate(action)
     }
 
     override fun onAnimeographyCLick(malId: Int) {
@@ -167,6 +212,11 @@ class CharacterDetailsFragment : Fragment(R.layout.fragment_character_details),
                 args.buttonColor
             )
         findNavController().navigate(action)
+    }
+
+    override fun onDialogDismiss() {
+        dialogState = false // unlock the ability for the fragment to create a new dialog
+        apiState = false // Unlock the ability to make another image api call
     }
 
     override fun onDestroyView() {

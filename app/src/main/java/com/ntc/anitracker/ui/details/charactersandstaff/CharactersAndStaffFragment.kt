@@ -1,6 +1,7 @@
 package com.ntc.anitracker.ui.details.charactersandstaff
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -15,6 +16,8 @@ import com.ntc.anitracker.databinding.FragmentCharactersStaffBinding
 import com.ntc.anitracker.ui.adapters.detailsadapters.CharactersAndStaffAdapter
 import com.ntc.anitracker.ui.adapters.detailsadapters.VoiceActorAdapter
 import dagger.hilt.android.AndroidEntryPoint
+
+private const val TAG = "CharactersAndStaff"
 
 @AndroidEntryPoint
 class CharactersAndStaffFragment : Fragment(R.layout.fragment_characters_staff),
@@ -39,7 +42,11 @@ class CharactersAndStaffFragment : Fragment(R.layout.fragment_characters_staff),
         })
 
         binding.clDetails.setBackgroundColor(args.bgColor) // set Background color early to avoid white screen flashes
-        viewModel.getCharactersAndStaffInfo(args.animeId)
+
+        when (args.mediaType) {
+            "anime" -> viewModel.getAnimeCharactersAndStaffInfo(args.malId)
+            "manga" -> viewModel.getMangaCharactersAndStaffInfo(args.malId)
+        }
     }
 
     private fun bindUi(characterInfo: CharactersAndStaff) {
@@ -65,31 +72,35 @@ class CharactersAndStaffFragment : Fragment(R.layout.fragment_characters_staff),
 
     private fun getCharStaffList(charInfo: CharactersAndStaff): List<CharacterStaff> {
         val list: MutableList<CharacterStaff> = mutableListOf()
-        for (character in charInfo.characters) {
-            list.add(
-                CharacterStaff(
-                    character.image_url,
-                    character.mal_id,
-                    character.name,
-                    character.role,
-                    character.voice_actors,
-                    null
+        if (!charInfo.characters.isNullOrEmpty()) {
+            for (character in charInfo.characters) {
+                list.add(
+                    CharacterStaff(
+                        character.image_url,
+                        character.mal_id,
+                        character.name,
+                        character.role,
+                        character.voice_actors,
+                        null
+                    )
                 )
-            )
-        }
-        for (staff in charInfo.staff) {
-            list.add(
-                CharacterStaff(
-                    staff.image_url,
-                    staff.mal_id,
-                    staff.name,
-                    null,
-                    null,
-                    staff.positions
-                )
-            )
+            }
         }
 
+        if (!charInfo.staff.isNullOrEmpty()) {
+            for (staff in charInfo.staff) {
+                list.add(
+                    CharacterStaff(
+                        staff.image_url,
+                        staff.mal_id,
+                        staff.name,
+                        null,
+                        null,
+                        staff.positions
+                    )
+                )
+            }
+        }
         return list
     }
 
@@ -102,6 +113,7 @@ class CharactersAndStaffFragment : Fragment(R.layout.fragment_characters_staff),
     }
 
     override fun onStaffClick(mal_id: Int) {
+        Log.d(TAG, "onStaffClick: STAFF :")
         val action =
             CharactersAndStaffFragmentDirections.actionCharactersAndStaffFragmentToPersonDetailsFragment(
                 mal_id, args.titleTextColor, args.bodyTextColor, args.bgColor, args.buttonColor

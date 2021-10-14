@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/svDetails"
+    android:id="@+id/svMangaDetails"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_black"
@@ -11,31 +11,31 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:contentDescription="Anime Information"
+        android:contentDescription="Manga Information"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/ivCover"
+            android:id="@+id/ivMangaCover"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
             android:scaleType="centerCrop"
-            app:layout_constraintBottom_toTopOf="@+id/tvAiringStartTime"
+            app:layout_constraintBottom_toTopOf="@+id/tvMangaSynopsisText"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@drawable/test_image" />
 
         <TextView
-            android:id="@+id/tvAnimeNameEn"
+            android:id="@+id/tvMangaNameEn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:ellipsize="end"
@@ -44,15 +44,14 @@
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/ivCover"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Loading" />
 
         <TextView
-            android:id="@+id/tvAnimeNameJp"
+            android:id="@+id/tvMangaNameJp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:ellipsize="end"
@@ -60,8 +59,8 @@
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/ivCover"
-            app:layout_constraintTop_toBottomOf="@+id/tvAnimeNameEn"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/tvMangaNameEn"
             tools:text="Loading" />
 
         <androidx.constraintlayout.widget.Guideline
@@ -72,116 +71,123 @@
             app:layout_constraintGuide_percent=".5" />
 
         <TextView
-            android:id="@+id/tvTextScore"
+            android:id="@+id/tvMangaTextScore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:textSize="14sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/ivCover"
-            app:layout_constraintTop_toBottomOf="@+id/tvAnimeNameJp"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/tvMangaNameJp"
             tools:text="Score:" />
 
         <TextView
-            android:id="@+id/tvUsersText"
+            android:id="@+id/tvMangaUsersText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/tvAnimeScore"
-            app:layout_constraintTop_toBottomOf="@+id/tvAnimeNameJp"
+            app:layout_constraintStart_toEndOf="@+id/tvMangaAnimeScore"
+            app:layout_constraintTop_toBottomOf="@+id/tvMangaNameJp"
             tools:text="Users:" />
 
         <TextView
-            android:id="@+id/tvMyScoreText"
+            android:id="@+id/tvMangaMyScoreText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:textSize="28sp"
+            android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/guideline2"
-            app:layout_constraintTop_toBottomOf="@+id/tvUsersText"
+            app:layout_constraintTop_toBottomOf="@+id/tvMangaUsersText"
             tools:text="My Score:" />
 
         <TextView
-            android:id="@+id/tvMyScore"
+            android:id="@+id/tvMangaMyScore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:textSize="32sp"
+            android:textSize="28sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/ivCover"
-            app:layout_constraintTop_toBottomOf="@+id/tvMyScoreText"
+            app:layout_constraintEnd_toEndOf="@+id/tvMangaMyScoreText"
+            app:layout_constraintStart_toStartOf="@+id/tvMangaMyScoreText"
+            app:layout_constraintTop_toBottomOf="@+id/tvMangaMyScoreText"
             tools:text="--" />
 
         <TextView
-            android:id="@+id/tvTextEpisodes"
+            android:id="@+id/tvMangaTextChapters"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/ivCover"
-            app:layout_constraintTop_toBottomOf="@+id/tvMyScore"
-            tools:text="Episodes: " />
+            app:layout_constraintBaseline_toBaselineOf="@+id/tvMangaMyScoreText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tvMangaMyScoreText"
+            tools:text="Chapters:" />
 
         <TextView
-            android:id="@+id/tvPopularityText"
+            android:id="@+id/tvMangaPopularityText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/ivCover"
-            app:layout_constraintTop_toBottomOf="@+id/tvTextEpisodes"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/tvMangaMyScore"
             tools:text="Popularity:" />
 
         <TextView
-            android:id="@+id/tvStartedAiringText"
+            android:id="@+id/tvMangaStartedPublishingText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/ivCover"
-            app:layout_constraintTop_toBottomOf="@+id/tvPopularityText"
-            tools:text="Started Airing:" />
+            app:layout_constrainedWidth="true"
+            app:layout_constraintEnd_toStartOf="@+id/tvMangaVolumes"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/ivMangaCover"
+            app:layout_constraintTop_toBottomOf="@+id/tvMangaPopularityText"
+            tools:text="Started Publishing:" />
 
         <TextView
-            android:id="@+id/tvFinishedAiringText"
+            android:id="@+id/tvMangaFinishedPublishingText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/ivCover"
-            app:layout_constraintTop_toBottomOf="@+id/tvAiringStartTime"
-            tools:text="Finished Airing:" />
+            app:layout_constrainedWidth="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/ivMangaCover"
+            app:layout_constraintTop_toBottomOf="@+id/tvMangaPublishStartTime"
+            tools:text="Finished Publishng:" />
 
         <TextView
-            android:id="@+id/tvSynopsisText"
+            android:id="@+id/tvMangaSynopsisText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
             android:textAlignment="textStart"
             android:textSize="24sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/tvSynopsis"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tvMangaPublishingEnd"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ivCover"
-            app:layout_constraintVertical_bias="1.0"
             tools:text="Synopsis: " />
 
         <TextView
-            android:id="@+id/tvSynopsis"
+            android:id="@+id/tvMangaSynopsis"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -191,24 +197,23 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvAiringEnd"
+            app:layout_constraintTop_toBottomOf="@+id/tvMangaPublishingEnd"
             tools:text="As a wild youth, elementary school student Shouya Ishida sought to beat boredom in the cruelest ways. When the deaf Shouko Nishimiya transfers into his class, Shouya and the rest of his class thoughtlessly bully her for fun. However, when her mother notifies the school, he is singled out and blamed for everything done to her. With Shouko transferring out of the school, Shouya is left at the mercy of his classmates. He is heartlessly ostracized all throughout elementary and middle school, while teachers turn a blind eye.  Now in his third year of high school, Shouya is still plagued by his wrongdoings as a young boy. Sincerely regretting his past actions, he sets out on a journey of redemption: to meet Shouko once more and make amends.  Koe no Katachi tells the heartwarming tale of Shouya's reunion with Shouko and his honest attempts to redeem himself, all while being continually haunted by the shadows of his past." />
 
         <TextView
-            android:id="@+id/tvGenres"
+            android:id="@+id/tvMangaGenres"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:textSize="18sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tvMangaGenresText"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/tvGenresText"
-            app:layout_constraintTop_toBottomOf="@+id/tvSynopsis"
+            app:layout_constraintStart_toEndOf="@+id/tvMangaGenresText"
             tools:text="Drama, School, Shounen" />
 
         <TextView
-            android:id="@+id/tvGenresText"
+            android:id="@+id/tvMangaGenresText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -216,11 +221,11 @@
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvSynopsis"
+            app:layout_constraintTop_toBottomOf="@+id/tvMangaSynopsis"
             tools:text="Genres:" />
 
         <TextView
-            android:id="@+id/tvOpeningsText"
+            android:id="@+id/tvSerializationsText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -228,97 +233,46 @@
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvGenres"
-            tools:text="Opening Themes:" />
+            app:layout_constraintTop_toBottomOf="@+id/tvMangaGenres"
+            tools:text="Serializations:" />
 
         <TextView
-            android:id="@+id/tvOpeningThemes"
+            android:id="@+id/tvMangaSerializations"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:textSize="18sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tvSerializationsText"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/tvOpeningsText"
-            app:layout_constraintTop_toBottomOf="@+id/tvGenres"
+            app:layout_constraintStart_toEndOf="@+id/tvSerializationsText"
             tools:text="Opening" />
 
         <TextView
-            android:id="@+id/tvEndingsText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvOpeningThemes"
-            tools:text="Ending Themes:" />
-
-        <TextView
-            android:id="@+id/tvEndingThemes"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/tvEndingsText"
-            app:layout_constraintTop_toBottomOf="@+id/tvOpeningThemes"
-            tools:text="Ending" />
-
-        <TextView
-            android:id="@+id/tvStudiosText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvEndingThemes"
-            tools:text="Studios:" />
-
-        <TextView
-            android:id="@+id/tvStudios"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/tvStudiosText"
-            app:layout_constraintTop_toBottomOf="@+id/tvEndingThemes"
-            tools:text="Kyoto Animation" />
-
-        <TextView
-            android:id="@+id/tvAnimeScore"
+            android:id="@+id/tvMangaAnimeScore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:textSize="14sp"
-            app:layout_constraintStart_toEndOf="@+id/tvTextScore"
-            app:layout_constraintTop_toBottomOf="@+id/tvAnimeNameJp"
+            app:layout_constraintStart_toEndOf="@+id/tvMangaTextScore"
+            app:layout_constraintTop_toBottomOf="@+id/tvMangaNameJp"
             tools:text="8.35" />
 
         <TextView
-            android:id="@+id/tvUsersAmount"
+            android:id="@+id/tvMangaUsersAmount"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/tvUsersText"
-            app:layout_constraintTop_toBottomOf="@+id/tvAnimeNameJp"
+            app:layout_constraintStart_toEndOf="@+id/tvMangaUsersText"
+            app:layout_constraintTop_toBottomOf="@+id/tvMangaNameJp"
             tools:text="313131" />
 
         <TextView
-            android:id="@+id/tvAiringStartTime"
+            android:id="@+id/tvMangaPublishStartTime"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -326,12 +280,12 @@
             android:maxLines="1"
             android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/ivCover"
-            app:layout_constraintTop_toBottomOf="@+id/tvStartedAiringText"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/tvMangaStartedPublishingText"
             tools:text="Sep 17, 2016" />
 
         <TextView
-            android:id="@+id/tvAiringEnd"
+            android:id="@+id/tvMangaPublishingEnd"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -339,12 +293,12 @@
             android:maxLines="1"
             android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/ivCover"
-            app:layout_constraintTop_toBottomOf="@+id/tvFinishedAiringText"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/tvMangaFinishedPublishingText"
             tools:text="Sep 17, 2016" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnCharactersAndStaff"
+            android:id="@+id/btnMangaCharactersAndStaff"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -354,11 +308,11 @@
             android:maxLines="1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvStudios"
+            app:layout_constraintTop_toBottomOf="@+id/tvSerializationsText"
             tools:text="Characters and Staff Information" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnRecommendations"
+            android:id="@+id/btnMangaRecommendations"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -366,81 +320,88 @@
             android:layout_marginEnd="8dp"
             android:ellipsize="end"
             android:maxLines="1"
-            app:layout_constraintEnd_toStartOf="@+id/btnRelated"
+            app:layout_constraintEnd_toStartOf="@+id/btnMangaRelated"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_weight="66"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnCharactersAndStaff"
+            app:layout_constraintTop_toBottomOf="@+id/btnMangaCharactersAndStaff"
             tools:text="Recommendations" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnEpisodeinfo"
+            android:id="@+id/btnMangaReviews"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:ellipsize="end"
-            android:maxLines="1"
-            app:layout_constraintBottom_toBottomOf="@+id/btnReviews"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintHorizontal_weight="66"
-            app:layout_constraintStart_toEndOf="@+id/btnReviews"
-            app:layout_constraintTop_toBottomOf="@+id/btnRecommendations"
-            tools:text="Episode Information" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnReviews"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:ellipsize="end"
             android:maxLines="1"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btnEpisodeinfo"
-            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_weight="33"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnRecommendations"
+            app:layout_constraintTop_toBottomOf="@+id/btnMangaRecommendations"
             tools:text="Reviews" />
 
         <TextView
-            android:id="@+id/tvEpisodeCount"
+            android:id="@+id/tvMangaChapterCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="@+id/tvPopularity"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/tvPopularity"
-            app:layout_constraintTop_toBottomOf="@+id/tvMyScore"
-            tools:text="12" />
+            android:layout_marginTop="4dp"
+            app:layout_constraintEnd_toEndOf="@+id/tvMangaTextChapters"
+            app:layout_constraintStart_toStartOf="@+id/tvMangaTextChapters"
+            app:layout_constraintTop_toBottomOf="@+id/tvMangaTextChapters"
+            tools:text="1222" />
 
         <TextView
-            android:id="@+id/tvPopularity"
+            android:id="@+id/tvMangaPopularity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintStart_toEndOf="@+id/tvPopularityText"
-            app:layout_constraintTop_toBottomOf="@+id/tvEpisodeCount"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tvMangaPopularityText"
+            app:layout_constraintStart_toEndOf="@+id/tvMangaPopularityText"
             tools:text="45" />
 
         <Button
-            android:id="@+id/btnRelated"
+            android:id="@+id/btnMangaRelated"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:text="Related"
-            app:layout_constraintBottom_toBottomOf="@+id/btnRecommendations"
+            android:ellipsize="end"
+            android:maxLines="1"
+            app:layout_constraintBaseline_toBaselineOf="@+id/btnMangaRecommendations"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_weight="33"
-            app:layout_constraintStart_toEndOf="@+id/btnRecommendations"
-            app:layout_constraintTop_toBottomOf="@+id/btnCharactersAndStaff" />
+            app:layout_constraintStart_toEndOf="@+id/btnMangaRecommendations"
+            tools:text="Related" />
+
+        <TextView
+            android:id="@+id/tvMangaVolumesText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/tvMangaTextChapters"
+            app:layout_constraintTop_toBottomOf="@+id/tvMangaChapterCount"
+            tools:text="Volumes:" />
+
+        <TextView
+            android:id="@+id/tvMangaVolumes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintEnd_toEndOf="@+id/tvMangaVolumesText"
+            app:layout_constraintStart_toStartOf="@+id/tvMangaVolumesText"
+            app:layout_constraintTop_toBottomOf="@+id/tvMangaVolumesText"
+            tools:text="123" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

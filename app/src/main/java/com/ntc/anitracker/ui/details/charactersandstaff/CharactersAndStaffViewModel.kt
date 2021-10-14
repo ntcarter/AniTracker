@@ -24,11 +24,23 @@ class CharactersAndStaffViewModel @Inject constructor(
     val characterInfo: LiveData<CharactersAndStaff?>
         get() = _characterInfo
 
-    fun getCharactersAndStaffInfo(malId: Int) {
+    fun getAnimeCharactersAndStaffInfo(malId: Int) {
         var info: CharactersAndStaff?
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 info = repository.getAnimeCharacters(malId)
+                _characterInfo.postValue(info)
+            } catch (e: HttpException) {
+                Log.d(TAG, "getCharactersAndStaffInfo: ERROR")
+            }
+        }
+    }
+
+    fun getMangaCharactersAndStaffInfo(malId: Int) {
+        var info: CharactersAndStaff?
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                info = repository.getMangaCharacters(malId)
                 _characterInfo.postValue(info)
             } catch (e: HttpException) {
                 Log.d(TAG, "getCharactersAndStaffInfo: ERROR")

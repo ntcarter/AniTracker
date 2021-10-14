@@ -1,5 +1,7 @@
 package com.ntc.anitracker.api.models.manga
 
+import com.ntc.anitracker.api.models.anime.Related
+
 
 data class Manga(
     val authors: List<Author>,

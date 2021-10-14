@@ -4,6 +4,8 @@ import com.ntc.anitracker.api.models.anime.Anime
 import com.ntc.anitracker.api.models.characterdetails.CharacterDetails
 import com.ntc.anitracker.api.models.charactersandstaff.CharactersAndStaff
 import com.ntc.anitracker.api.models.episode.EpisodeInfo
+import com.ntc.anitracker.api.models.images.ImageData
+import com.ntc.anitracker.api.models.manga.Manga
 import com.ntc.anitracker.api.models.person.Person
 import com.ntc.anitracker.api.models.recommendations.Recommendations
 import com.ntc.anitracker.api.models.reviews.Reviews
@@ -55,8 +57,13 @@ interface JikanAPI {
         @Path("id") id: Int
     ): Anime
 
+    @GET("/v3/anime/{id}/pictures")
+    suspend fun getAnimeImageData(
+        @Path("id") id: Int
+    ): ImageData
+
     @GET("/v3/anime/{id}/recommendations")
-    suspend fun getRecommendations(
+    suspend fun getAnimeRecommendations(
         @Path("id") id: Int
     ): Recommendations
 
@@ -109,9 +116,35 @@ interface JikanAPI {
         @Path("page") page: Int
     ): TopManga
 
+    @GET("/v3/manga/{id}")
+    suspend fun getMangaData(
+        @Path("id") id: Int
+    ): Manga
+
+    @GET("/v3/manga/{id}/pictures")
+    suspend fun getMangaImageData(
+        @Path("id") id: Int
+    ): ImageData
+
+    @GET("/v3/manga/{id}/recommendations")
+    suspend fun getMangaRecommendations(
+        @Path("id") id: Int
+    ): Recommendations
+
+    @GET("https://api.jikan.moe/v3/manga/{id}/reviews/{page}")
+    suspend fun getMangaReviews(
+        @Path("page") page: Int,
+        @Path("id") id: Int
+    ): Reviews
+
     // Characters and Staff
     @GET("/v3/anime/{id}/characters_staff")
     suspend fun getAnimeCharacters(
+        @Path("id") id: Int
+    ): CharactersAndStaff
+
+    @GET("/v3/manga/{id}/characters")
+    suspend fun getMangaCharacters(
         @Path("id") id: Int
     ): CharactersAndStaff
 
@@ -124,6 +157,16 @@ interface JikanAPI {
     suspend fun getPersonDetails(
         @Path("id") id: Int
     ): Person
+
+    @GET("/v3/person/{id}/pictures")
+    suspend fun getPersonImageData(
+        @Path("id") id: Int
+    ): ImageData
+
+    @GET("/v3/character/{id}/pictures")
+    suspend fun getCharacterImageData(
+        @Path("id") id: Int
+    ): ImageData
 
 //    suspend fun searchAnime(
 //        @Query("query") query: String,

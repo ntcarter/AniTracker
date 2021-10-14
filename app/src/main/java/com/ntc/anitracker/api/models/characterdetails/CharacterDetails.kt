@@ -9,7 +9,7 @@ data class CharacterDetails(
     val mal_id: Int,
     val mangaography: List<OGraphy>,
     val member_favorites: Int,
-    val name: String,
+    val name: String?,
     val name_kanji: String,
     val nicknames: List<Any>,
     val request_cache_expiry: Int,

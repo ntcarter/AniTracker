@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.chip.Chip
 import com.ntc.anitracker.R
 import com.ntc.anitracker.api.models.topanime.TopA
+import com.ntc.anitracker.api.models.topmanga.TopM
 import com.ntc.anitracker.databinding.FragmentGalleryBinding
 import com.ntc.anitracker.ui.adapters.galleryadapters.GalleryAnimeAdapter
 import com.ntc.anitracker.ui.adapters.galleryadapters.GalleryMangaAdapter
@@ -20,6 +21,7 @@ import kotlinx.coroutines.launch
 
 private const val TAG = "GalleryFragment"
 private const val TAP_LOCK_TIME_MILLISECONDS = 1500
+
 @AndroidEntryPoint
 class GalleryFragment : Fragment(R.layout.fragment_gallery),
     GalleryAnimeAdapter.OnItemClickListener,
@@ -41,11 +43,16 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery),
 
         _binding = FragmentGalleryBinding.bind(view)
 
-        setUpChipGroupListeners()
+        // check default values
+        if (viewModel.currentAnimeOption == 0) {
+            viewModel.currentAnimeOption = binding.chipScore.id
+            binding.chipAnime.isChecked = true
+        }
+        if (viewModel.currentMangaOption == 0) {
+            viewModel.currentMangaOption = binding.chipMangaScore.id
+        }
 
-        // set default values
-        viewModel.currentAnimeOption = binding.chipScore.id
-        viewModel.currentMangaOption = binding.chipMangaScore.id
+        setUpChipGroupListeners()
 
         animeAdapter = GalleryAnimeAdapter(this)
         mangaAdapter = GalleryMangaAdapter(this)
@@ -82,7 +89,6 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery),
     }
 
     override fun onResume() {
-        Log.d(TAG, "onResume: recording time")
         timeResumed = System.currentTimeMillis()
         super.onResume()
     }
@@ -102,8 +108,10 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery),
             // changes the selected option
             chipGroupOptions.setOnCheckedChangeListener { _, checkedId ->
                 if (chipAnime.isChecked) {
+                    Log.d(TAG, "setUpChipGroupListeners: SETTING ANIME OPTION")
                     viewModel.currentAnimeOption = checkedId // tracks anime options selection
-                } else { // manga chip selected
+                } else if(chipManga.isChecked){ // manga chip selected
+                    Log.d(TAG, "setUpChipGroupListeners: SETTING MANGA OPTION")
                     viewModel.currentMangaOption = checkedId // tracks manga options selection
                 }
 
@@ -176,16 +184,18 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery),
             val mangaOptionChip = chipGroupOptions.findViewById<Chip>(activeMangaChipId)
 
             if (binding.chipAnime.isChecked) {
+                Log.d(TAG, "selectChip: switching to anime chip: ${animeOptionChip.text}")
                 mangaOptionChip.isChecked = false
                 animeOptionChip.isChecked = true
             } else {
+                Log.d(TAG, "selectChip: switching to manga chip ${mangaOptionChip.text}")
                 animeOptionChip.isChecked = false
                 mangaOptionChip.isChecked = true
             }
         }
     }
 
-    override fun onCoverClick(anime: TopA) {
+    override fun onAnimeCoverClick(anime: TopA) {
         lifecycleScope.launch {
             var currentTime = System.currentTimeMillis()
             // The API is a little slow so delay a users quick tap
@@ -196,6 +206,21 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery),
             // pass the anime to the details fragment. It will handle making further api calls
             val action =
                 GalleryFragmentDirections.actionGalleryFragmentToAnimeDetailsFragment(anime.mal_id)
+            findNavController().navigate(action)
+        }
+    }
+
+    override fun onMangaCoverClick(manga: TopM) {
+        lifecycleScope.launch {
+            var currentTime = System.currentTimeMillis()
+            // The API is a little slow so delay a users quick tap
+            while (currentTime - timeResumed < TAP_LOCK_TIME_MILLISECONDS) {
+                delay(1000)
+                currentTime = System.currentTimeMillis()
+            }
+            // pass the anime to the details fragment. It will handle making further api calls
+            val action =
+                GalleryFragmentDirections.actionGalleryFragmentToMangaDetailsFragment(manga.mal_id)
             findNavController().navigate(action)
         }
     }

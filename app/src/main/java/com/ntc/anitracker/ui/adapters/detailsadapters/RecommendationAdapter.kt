@@ -13,7 +13,8 @@ class RecommendationAdapter(
     private val recList: List<Recommendation>,
     val titleTextColor: Int,
     val bodyTextColor: Int,
-    val listener: OnRecClick
+    val listener: OnRecClick,
+    val isAnime: Boolean
 ) : RecyclerView.Adapter<RecommendationAdapter.RecViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecViewHolder {
@@ -40,8 +41,14 @@ class RecommendationAdapter(
                     .error(R.drawable.ic_error)
                     .into(ivRec)
 
-                ivRec.setOnClickListener {
-                    listener.onRecAnimeClick(rec.mal_id)
+                if(isAnime){
+                    ivRec.setOnClickListener {
+                        listener.onRecAnimeClick(rec.mal_id)
+                    }
+                }else {
+                    ivRec.setOnClickListener {
+                        listener.onRecMangaClick(rec.mal_id)
+                    }
                 }
 
                 tvRecName.text = rec.title
@@ -54,5 +61,6 @@ class RecommendationAdapter(
 
     interface OnRecClick {
         fun onRecAnimeClick(malId: Int)
+        fun onRecMangaClick(malId: Int)
     }
 }

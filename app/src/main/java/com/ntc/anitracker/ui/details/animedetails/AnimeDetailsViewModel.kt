@@ -6,6 +6,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ntc.anitracker.api.models.anime.Anime
+import com.ntc.anitracker.api.models.anime.Genre
+import com.ntc.anitracker.api.models.anime.Studio
+import com.ntc.anitracker.api.models.images.ImageData
 import com.ntc.anitracker.data.JikanRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -25,15 +28,71 @@ class AnimeDetailsViewModel @Inject constructor(
     val anime: LiveData<Anime?>
         get() = _anime
 
-    fun getAnimeData(malId: Int){
+    // image data
+    private val _images = MutableLiveData<ImageData?>(null)
+    val images: LiveData<ImageData?>
+        get() = _images
+
+    fun getAnimeData(malId: Int) {
         var anime: Anime?
         viewModelScope.launch(Dispatchers.IO) {
-            try{
+            try {
                 anime = repository.getAnimeDataFromJikan(malId)
                 _anime.postValue(anime)
-            }catch (e: HttpException){
+            } catch (e: HttpException) {
                 Log.d(TAG, "getAnimeData: ERROR")
             }
         }
     }
+
+    fun getAnimeImageData(malId: Int) {
+        var images: ImageData?
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                images = repository.getAnimeImageDataFromJikan(malId)
+                _images.postValue(images)
+            } catch (e: HttpException) {
+                Log.d(TAG, "getAnimeData: ERROR")
+            }
+        }
+    }
+
+    fun getStudioList(studios: List<Studio>): String {
+        var studiosResult = ""
+        for (studio in studios) {
+            if (studio != studios[studios.size - 1]) {
+                studiosResult += "${studio.name}, "
+            } else { // last element
+                studiosResult += studio.name
+            }
+        }
+        return studiosResult
+    }
+
+    fun getOpeningsList(openingThemes: List<String>): String {
+        var openings = ""
+
+        for (opening in openingThemes) {
+            if (opening != openingThemes[openingThemes.size - 1]) {
+                openings += "$opening, \n\n"
+            } else { // last element
+                openings += opening
+            }
+        }
+        return openings
+    }
+
+    fun getGenreList(genresList: List<Genre>): String {
+        var genresResult = ""
+        for (genre in genresList) {
+            if (genre.name != genresList[genresList.size - 1].name) {
+                genresResult += "${genre.name}, "
+            } else { // last element
+                genresResult += genre.name
+            }
+        }
+        return genresResult
+    }
+
+
 }

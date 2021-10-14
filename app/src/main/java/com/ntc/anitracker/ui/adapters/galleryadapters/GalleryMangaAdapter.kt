@@ -33,7 +33,9 @@ class GalleryMangaAdapter(
         }
     }
 
-    interface OnItemClickListener {}
+    interface OnItemClickListener {
+        fun onMangaCoverClick(manga: TopM)
+    }
 
     inner class TopMangaViewHolder(private val binding: ItemGalleryBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -44,6 +46,10 @@ class GalleryMangaAdapter(
                     .transition(DrawableTransitionOptions.withCrossFade())
                     .error(R.drawable.ic_error)
                     .into(imageCover)
+
+                imageCover.setOnClickListener {
+                    listener.onMangaCoverClick(top)
+                }
 
                 titleText.text = top.title
                 titleText.text = top.title

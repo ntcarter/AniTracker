@@ -1,5 +1,6 @@
 package com.ntc.anitracker.data.pagingsources
 
+import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.ntc.anitracker.api.models.reviews.Review
@@ -8,7 +9,7 @@ import retrofit2.HttpException
 import java.io.IOException
 
 private const val REVIEW_STARTING_PAGE_INDEX = 1
-
+private const val TAG = "ReviewPagingSource"
 class ReviewPagingSource(
     val api: JikanAPI,
     val malId: Int,
@@ -20,8 +21,13 @@ class ReviewPagingSource(
 
         return try {
 
-            // TODO here check isAnime and make manga call if false
-            val response = api.getAnimeReviews(position, malId)
+            val response = if (isAnime) {
+                Log.d(TAG, "load: ANIME REVIEWS")
+                api.getAnimeReviews(position, malId)
+            } else {
+                Log.d(TAG, "load: MANGAREVIEWS")
+                api.getMangaReviews(position, malId)
+            }
 
             val results = response.reviews ?: listOf()
 
@@ -32,9 +38,9 @@ class ReviewPagingSource(
                 // we know we are at the end of the results if the photos list is empty
                 nextKey = if (results.isEmpty()) null else position + 1
             )
-        } catch (e: IOException){
+        } catch (e: IOException) {
             LoadResult.Error(e)
-        }catch (e: HttpException){
+        } catch (e: HttpException) {
             LoadResult.Error(e)
         }
     }

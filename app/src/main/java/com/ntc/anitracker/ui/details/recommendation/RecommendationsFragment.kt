@@ -36,24 +36,29 @@ class RecommendationsFragment : Fragment(R.layout.fragment_recommendations),
             }
         })
 
-        binding.clBg.setBackgroundColor(args.bgColor)
-        viewModel.getRecommendations(args.malId)
-    }
-
-    private fun bindUI(recList: List<Recommendation>) {
         binding.apply {
+            clBg.setBackgroundColor(args.bgColor)
+
             if (args.isAnime) {
                 tvRecHeader.text = "Anime Similar To: ${args.title}"
             } else {
                 tvRecHeader.text = "Manga Similar To: ${args.title}"
             }
             tvRecHeader.setTextColor(args.titleTextColor)
+        }
+
+        viewModel.getRecommendations(args.malId, args.isAnime)
+    }
+
+    private fun bindUI(recList: List<Recommendation>) {
+        binding.apply {
 
             val adapter = RecommendationAdapter(
                 recList,
                 args.titleTextColor,
                 args.bodyTextColor,
-                this@RecommendationsFragment
+                this@RecommendationsFragment,
+                args.isAnime
             )
 
             rvRec.adapter = adapter
@@ -71,6 +76,14 @@ class RecommendationsFragment : Fragment(R.layout.fragment_recommendations),
     override fun onRecAnimeClick(malId: Int) {
         val action =
             RecommendationsFragmentDirections.actionRecomendationsFragmentToAnimeDetailsFragment(
+                malId
+            )
+        findNavController().navigate(action)
+    }
+
+    override fun onRecMangaClick(malId: Int) {
+        val action =
+            RecommendationsFragmentDirections.actionRecomendationsFragmentToMangaDetailsFragment(
                 malId
             )
         findNavController().navigate(action)

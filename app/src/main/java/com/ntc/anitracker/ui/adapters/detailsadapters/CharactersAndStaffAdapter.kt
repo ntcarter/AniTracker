@@ -30,7 +30,7 @@ class CharactersAndStaffAdapter(
     override fun onBindViewHolder(holder: CharactersAndStaffViewHolder, position: Int) {
         val currentItem = infoList[position]
         // decides if a character or staff need to be bound to out item
-        if (currentItem.voice_actors.isNullOrEmpty()) {
+        if (currentItem.role.isNullOrEmpty()) {
             holder.bindStaff(currentItem)
         } else {
             holder.bindCharacter(currentItem)
