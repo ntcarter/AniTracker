@@ -203,6 +203,8 @@ class AnimeDetailsFragment : Fragment(R.layout.fragment_anime_details),
             }
             tvAiringEnd.text = if (animeInfo.aired.to != null) {
                 animeInfo.aired.to.subSequence(0..9)
+            } else if(animeInfo.airing) {
+                "Currently Airing"
             } else {
                 ""
             }
@@ -223,6 +225,7 @@ class AnimeDetailsFragment : Fragment(R.layout.fragment_anime_details),
             btnRecommendations.text = "Recommendations"
             btnReviews.text = "Reviews"
             btnEpisodeinfo.text = "Episode Information"
+            btnRelated.text = "Related"
 
             tvEpisodeCount.text = animeInfo.episodes.toString()
             tvPopularity.text = animeInfo.popularity.toString()

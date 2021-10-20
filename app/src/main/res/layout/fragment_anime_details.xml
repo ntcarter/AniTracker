@@ -24,8 +24,8 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:scaleType="centerCrop"
-            app:layout_constraintBottom_toTopOf="@+id/tvAiringStartTime"
+            android:scaleType="fitStart"
+            app:layout_constraintBottom_toTopOf="@+id/tvStartedAiringText"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -87,11 +87,10 @@
             android:id="@+id/tvUsersText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/tvAnimeScore"
-            app:layout_constraintTop_toBottomOf="@+id/tvAnimeNameJp"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/tvTextScore"
             tools:text="Users:" />
 
         <TextView
@@ -300,6 +299,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@+id/tvTextScore"
             app:layout_constraintTop_toBottomOf="@+id/tvAnimeNameJp"
@@ -310,11 +311,13 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tvUsersText"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@+id/tvUsersText"
-            app:layout_constraintTop_toBottomOf="@+id/tvAnimeNameJp"
             tools:text="313131" />
 
         <TextView
@@ -428,19 +431,21 @@
             app:layout_constraintTop_toBottomOf="@+id/tvEpisodeCount"
             tools:text="45" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnRelated"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:text="Related"
+            android:ellipsize="end"
+            android:maxLines="1"
             app:layout_constraintBottom_toBottomOf="@+id/btnRecommendations"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_weight="33"
             app:layout_constraintStart_toEndOf="@+id/btnRecommendations"
-            app:layout_constraintTop_toBottomOf="@+id/btnCharactersAndStaff" />
+            app:layout_constraintTop_toBottomOf="@+id/btnCharactersAndStaff"
+            tools:text="Related" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

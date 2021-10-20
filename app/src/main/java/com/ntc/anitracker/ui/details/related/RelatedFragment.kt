@@ -141,7 +141,8 @@ class RelatedFragment : Fragment(R.layout.fragment_related), RelatedAdapter.OnRe
     }
 
     override fun onRelatedMangaClick(malId: Int) {
-//        TODO("Not yet implemented")
+        val action = RelatedFragmentDirections.actionRelatedFragmentToMangaDetailsFragment(malId)
+        findNavController().navigate(action)
     }
 
     override fun onDestroyView() {

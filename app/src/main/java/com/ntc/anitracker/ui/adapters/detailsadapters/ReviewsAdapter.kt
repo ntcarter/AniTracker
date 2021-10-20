@@ -16,7 +16,8 @@ private const val TAG = "ReviewsAdapter"
 class ReviewsAdapter(
     var titleTextColor: Int,
     var bodyTextColor: Int,
-    val listener: OnReviewTap
+    val listener: OnReviewTap,
+    val isAnime: Boolean
 ) : PagingDataAdapter<Review, ReviewsAdapter.ReviewViewHolder>(REVIEW_COMPARATOR) {
 
     override fun onBindViewHolder(holder: ReviewViewHolder, position: Int) {
@@ -48,16 +49,54 @@ class ReviewsAdapter(
                     .into(ivUser)
 
                 tvReviewDate.text = currentItem.date?.substring(0..9) ?: ""
-                tvReviewSeen.text =
-                    "Episodes Seen: ${currentItem.reviewer.episodes_seen.toString()}"
-                tvReviewUsername.text = currentItem.reviewer.username
 
-                tvReviewAnimation.text = "Animation: ${currentItem.reviewer.scores.animation}"
-                tvReviewCharacter.text = "Character: ${currentItem.reviewer.scores.character}"
-                tvReviewEnjoyment.text = "Enjoyment: ${currentItem.reviewer.scores.enjoyment}"
-                tvReviewOverall.text = "Overall: ${currentItem.reviewer.scores.overall}"
-                tvReviewSound.text = "Sound: ${currentItem.reviewer.scores.sound}"
-                tvReviewStory.text = "Story: ${currentItem.reviewer.scores.story}"
+                if(isAnime){
+                    // anime review
+                    tvReviewSeen.text =
+                        "Episodes Read: ${currentItem.reviewer.episodes_seen.toString()}"
+                    tvReviewUsername.text = currentItem.reviewer.username
+
+                    tvReviewAnimation.text = "Animation:"
+                    tvAnimationScore.text = "${currentItem.reviewer.scores.animation}"
+
+                    tvReviewCharacter.text = "Character:"
+                    tvCharacterScore.text = "${currentItem.reviewer.scores.character}"
+
+                    tvReviewEnjoyment.text = "Enjoyment:"
+                    tvEnjoymentScore.text = "${currentItem.reviewer.scores.enjoyment}"
+
+                    tvReviewOverall.text = "Overall:"
+                    tvOverallScore.text = "${currentItem.reviewer.scores.overall}"
+
+                    tvReviewSound.text = "Sound:"
+                    tvSoundScore.text = "${currentItem.reviewer.scores.sound}"
+
+                    tvReviewStory.text = "Story:"
+                    tvStoryScore.text = "${currentItem.reviewer.scores.story}"
+                } else {
+                    // manga review
+                    tvReviewSeen.text =
+                        "Chapters Seen: ${currentItem.reviewer.chapters_read.toString()}"
+                    tvReviewUsername.text = currentItem.reviewer.username
+
+                    tvReviewAnimation.text = "Art:"
+                    tvAnimationScore.text = "${currentItem.reviewer.scores.art}"
+
+                    tvReviewCharacter.text = "Character:"
+                    tvCharacterScore.text = "${currentItem.reviewer.scores.character}"
+
+                    tvReviewEnjoyment.text = ""
+                    tvEnjoymentScore.text = ""
+
+                    tvReviewOverall.text = "Overall:"
+                    tvOverallScore.text = "${currentItem.reviewer.scores.overall}"
+
+                    tvReviewSound.text = "Enjoyment:"
+                    tvSoundScore.text = "${currentItem.reviewer.scores.enjoyment}"
+
+                    tvReviewStory.text = "Story:"
+                    tvStoryScore.text = "${currentItem.reviewer.scores.story}"
+                }
 
                 // color
 
@@ -73,11 +112,18 @@ class ReviewsAdapter(
                 tvReviewStory.setTextColor(bodyTextColor)
                 tvReviewSound.setTextColor(bodyTextColor)
                 tvReviewEnjoyment.setTextColor(bodyTextColor)
+
+                tvOverallScore.setTextColor(bodyTextColor)
+                tvAnimationScore.setTextColor(bodyTextColor)
+                tvCharacterScore.setTextColor(bodyTextColor)
+                tvStoryScore.setTextColor(bodyTextColor)
+                tvSoundScore.setTextColor(bodyTextColor)
+                tvEnjoymentScore.setTextColor(bodyTextColor)
             }
         }
     }
 
-    interface OnReviewTap{
+    interface OnReviewTap {
         fun onTapReview(review: Review)
     }
 

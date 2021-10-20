@@ -6,7 +6,7 @@ import com.ntc.anitracker.api.models.anime.Related
 data class Manga(
     val authors: List<Author>,
     val background: String,
-    val chapters: Int,
+    val chapters: Int?,
     val demographics: List<Demographic>,
     val explicit_genres: List<Any>,
     val external_links: List<ExternalLink>,
@@ -35,5 +35,5 @@ data class Manga(
     val title_synonyms: List<Any>,
     val type: String,
     val url: String,
-    val volumes: Int
+    val volumes: Int?
 )

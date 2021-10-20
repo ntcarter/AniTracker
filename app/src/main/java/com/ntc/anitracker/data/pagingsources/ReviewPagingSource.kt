@@ -1,6 +1,5 @@
 package com.ntc.anitracker.data.pagingsources
 
-import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.ntc.anitracker.api.models.reviews.Review
@@ -22,10 +21,8 @@ class ReviewPagingSource(
         return try {
 
             val response = if (isAnime) {
-                Log.d(TAG, "load: ANIME REVIEWS")
                 api.getAnimeReviews(position, malId)
             } else {
-                Log.d(TAG, "load: MANGAREVIEWS")
                 api.getMangaReviews(position, malId)
             }
 

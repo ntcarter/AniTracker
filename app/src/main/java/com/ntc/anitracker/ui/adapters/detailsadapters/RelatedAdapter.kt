@@ -39,7 +39,6 @@ class RelatedAdapter(
                     if (currentItem.animeType == "anime") {
                         listener.onRelatedAnimeClick(currentItem.mal_id)
                     } else if (currentItem.animeType == "manga") {
-
                         listener.onRelatedMangaClick(currentItem.mal_id)
                     }
                 }

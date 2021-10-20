@@ -31,7 +31,7 @@ class ReviewsFragment : Fragment(R.layout.fragment_reviews), ReviewsAdapter.OnRe
 
         _binding = FragmentReviewsBinding.bind(view)
 
-        val adapter = ReviewsAdapter(args.titleTextColor, args.bodyTextColor, this)
+        val adapter = ReviewsAdapter(args.titleTextColor, args.bodyTextColor, this, args.isAnime)
 
         binding.apply {
             rvReviews.adapter = adapter

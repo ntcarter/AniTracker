@@ -65,8 +65,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/tvReviewStory"
+        android:layout_marginTop="8dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textSize="12sp"
         app:layout_constraintEnd_toStartOf="@+id/tvReviewAnimation"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/ivUser"
@@ -77,16 +79,23 @@
         android:id="@+id/tvReviewStory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/tvReviewTap"
+        android:layout_marginTop="8dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@+id/tvReviewOverall"
         app:layout_constraintStart_toStartOf="@+id/tvReviewOverall"
-        app:layout_constraintTop_toBottomOf="@+id/tvReviewOverall"
+        app:layout_constraintTop_toBottomOf="@+id/tvOverallScore"
         tools:text="Story:" />
 
     <TextView
         android:id="@+id/tvReviewAnimation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textSize="12sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/tvReviewOverall"
         app:layout_constraintEnd_toStartOf="@+id/tvReviewCharacter"
         app:layout_constraintHorizontal_bias="0.5"
@@ -97,7 +106,11 @@
         android:id="@+id/tvReviewSound"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textSize="12sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/tvReviewStory"
+        app:layout_constraintEnd_toEndOf="@+id/tvReviewAnimation"
         app:layout_constraintStart_toStartOf="@+id/tvReviewAnimation"
         tools:text="Sound:" />
 
@@ -105,7 +118,13 @@
         android:id="@+id/tvReviewEnjoyment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textSize="12sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/tvReviewSound"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/tvReviewCharacter"
         tools:text="Enjoyment:" />
 
@@ -113,6 +132,10 @@
         android:id="@+id/tvReviewCharacter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textSize="12sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/tvReviewAnimation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -124,6 +147,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:text="Tap For Full Review"
@@ -131,7 +155,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/ivUser"
-        app:layout_constraintTop_toBottomOf="@+id/tvReviewStory" />
+        app:layout_constraintTop_toBottomOf="@+id/tvStoryScore" />
 
     <TextView
         android:id="@+id/tvReviewDate"
@@ -157,5 +181,67 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent=".25" />
+
+    <TextView
+        android:id="@+id/tvOverallScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@+id/tvReviewOverall"
+        app:layout_constraintStart_toStartOf="@+id/tvReviewOverall"
+        app:layout_constraintTop_toBottomOf="@+id/tvReviewOverall"
+        tools:text="9" />
+
+    <TextView
+        android:id="@+id/tvAnimationScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvOverallScore"
+        app:layout_constraintEnd_toEndOf="@+id/tvReviewAnimation"
+        app:layout_constraintStart_toStartOf="@+id/tvReviewAnimation"
+        tools:text="10" />
+
+    <TextView
+        android:id="@+id/tvCharacterScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvAnimationScore"
+        app:layout_constraintEnd_toEndOf="@+id/tvReviewCharacter"
+        app:layout_constraintStart_toStartOf="@+id/tvReviewCharacter"
+        tools:text="10" />
+
+    <TextView
+        android:id="@+id/tvStoryScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@+id/tvOverallScore"
+        app:layout_constraintStart_toStartOf="@+id/tvOverallScore"
+        app:layout_constraintTop_toBottomOf="@+id/tvReviewStory"
+        tools:text="7" />
+
+    <TextView
+        android:id="@+id/tvSoundScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvStoryScore"
+        app:layout_constraintEnd_toEndOf="@+id/tvAnimationScore"
+        app:layout_constraintStart_toStartOf="@+id/tvAnimationScore"
+        tools:text="10" />
+
+    <TextView
+        android:id="@+id/tvEnjoymentScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvSoundScore"
+        app:layout_constraintEnd_toEndOf="@+id/tvCharacterScore"
+        app:layout_constraintStart_toStartOf="@+id/tvCharacterScore"
+        tools:text="10" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,10 +7,11 @@
         <entry key="..\:/githubDesktop/AniTracker/app/src/main/res/drawable/gradient_gallery.xml" value="0.3769230769230769" />
         <entry key="..\:/githubDesktop/AniTracker/app/src/main/res/drawable/gradient_gallery_bg.xml" value="0.3769230769230769" />
         <entry key="..\:/githubDesktop/AniTracker/app/src/main/res/drawable/ic_error.xml" value="0.22135416666666666" />
+        <entry key="..\:/githubDesktop/AniTracker/app/src/main/res/drawable/ic_settings.xml" value="0.19375" />
         <entry key="..\:/githubDesktop/AniTracker/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
         <entry key="..\:/githubDesktop/AniTracker/app/src/main/res/layout/character_details_fragment.xml" value="0.36666666666666664" />
         <entry key="..\:/githubDesktop/AniTracker/app/src/main/res/layout/dialog_fragment_pictures.xml" value="0.22552083333333334" />
-        <entry key="..\:/githubDesktop/AniTracker/app/src/main/res/layout/fragment_anime_details.xml" value="0.5" />
+        <entry key="..\:/githubDesktop/AniTracker/app/src/main/res/layout/fragment_anime_details.xml" value="0.33" />
         <entry key="..\:/githubDesktop/AniTracker/app/src/main/res/layout/fragment_character_details.xml" value="0.5" />
         <entry key="..\:/githubDesktop/AniTracker/app/src/main/res/layout/fragment_characters_staff.xml" value="0.36666666666666664" />
         <entry key="..\:/githubDesktop/AniTracker/app/src/main/res/layout/fragment_episodes.xml" value="0.36666666666666664" />
@@ -31,7 +32,7 @@
         <entry key="..\:/githubDesktop/AniTracker/app/src/main/res/layout/item_options_button.xml" value="0.25" />
         <entry key="..\:/githubDesktop/AniTracker/app/src/main/res/layout/item_recommendation.xml" value="0.37864583333333335" />
         <entry key="..\:/githubDesktop/AniTracker/app/src/main/res/layout/item_related.xml" value="0.36666666666666664" />
-        <entry key="..\:/githubDesktop/AniTracker/app/src/main/res/layout/item_review.xml" value="0.5" />
+        <entry key="..\:/githubDesktop/AniTracker/app/src/main/res/layout/item_review.xml" value="0.75" />
         <entry key="..\:/githubDesktop/AniTracker/app/src/main/res/layout/item_voice_actor.xml" value="0.36666666666666664" />
       </map>
     </option>

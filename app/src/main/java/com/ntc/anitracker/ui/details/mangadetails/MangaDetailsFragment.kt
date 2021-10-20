@@ -26,7 +26,8 @@ import kotlinx.coroutines.launch
 private const val TAG = "AnimeDetailsFragment"
 
 @AndroidEntryPoint
-class MangaDetailsFragment : Fragment(R.layout.fragment_manga_details), PictureDetailsDialogFragment.OnDialogState {
+class MangaDetailsFragment : Fragment(R.layout.fragment_manga_details),
+    PictureDetailsDialogFragment.OnDialogState {
 
     private val args by navArgs<MangaDetailsFragmentArgs>()
 
@@ -37,6 +38,7 @@ class MangaDetailsFragment : Fragment(R.layout.fragment_manga_details), PictureD
 
     // Holds the state of an active image dialog. If true there's an active dialog currently showing
     private var dialogState = false
+
     // Holds the state of the Image api call so multiple calls cannot be made before a response is received
     private var apiState = false
 
@@ -204,6 +206,8 @@ class MangaDetailsFragment : Fragment(R.layout.fragment_manga_details), PictureD
             }
             tvMangaPublishingEnd.text = if (mangaInfo.published.to != null) {
                 mangaInfo.published.to.subSequence(0..9)
+            } else if (mangaInfo.publishing) {
+                "Currently Publishing"
             } else {
                 ""
             }
@@ -224,8 +228,18 @@ class MangaDetailsFragment : Fragment(R.layout.fragment_manga_details), PictureD
             btnMangaReviews.text = "Reviews"
             btnMangaRelated.text = "Related"
 
-            tvMangaChapterCount.text = mangaInfo.chapters.toString()
-            tvMangaVolumes.text = mangaInfo.volumes.toString()
+            tvMangaChapterCount.text = if (mangaInfo.chapters == null) {
+                "Publishing"
+            } else {
+                mangaInfo.chapters.toString()
+            }
+
+            tvMangaVolumes.text = if (mangaInfo.volumes == null) {
+                "Publishing"
+            } else {
+                mangaInfo.volumes.toString()
+            }
+
             tvMangaPopularity.text = mangaInfo.popularity.toString()
             tvMangaNameEn.text = mangaInfo.title_english ?: mangaInfo.title
             tvMangaNameEn.setOnClickListener(listener)
@@ -296,12 +310,13 @@ class MangaDetailsFragment : Fragment(R.layout.fragment_manga_details), PictureD
                         val dialog =
                             PictureDetailsDialogFragment(it.pictures, this@MangaDetailsFragment)
                         dialog.show(parentFragmentManager, "dialog")
-                        dialogState = true // lock the observer out of making anymore dialogs while one is open
+                        dialogState =
+                            true // lock the observer out of making anymore dialogs while one is open
                     }
                 })
 
                 // make the api call
-                if(!apiState){
+                if (!apiState) {
                     apiState = true
                     viewModel.getMangaImageData(args.malId)
                 }
