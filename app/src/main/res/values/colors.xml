@@ -10,4 +10,5 @@
 
     <color name="background_black">#FF212121</color>
     <color name="text_red">#FFe53935</color>
+    <color name="dark_theme_text">#FFDBD8E3</color>
 </resources>

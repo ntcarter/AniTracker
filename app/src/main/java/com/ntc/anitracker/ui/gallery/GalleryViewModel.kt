@@ -24,6 +24,8 @@ class GalleryViewModel @Inject constructor(
     // tracks the active option selected by the user
     val activeOption = MutableLiveData("Score")
 
+    var pageNumber = 1;
+
     fun getAnimeGalleryData() = activeOption.switchMap {
         repository.getAnimeGalleryData(activeOption.value!!).cachedIn(viewModelScope)
     }

@@ -25,7 +25,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:scaleType="fitStart"
-            app:layout_constraintBottom_toTopOf="@+id/tvStartedAiringText"
+            app:layout_constraintBottom_toBottomOf="@+id/tvAiringEnd"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -94,30 +94,6 @@
             tools:text="Users:" />
 
         <TextView
-            android:id="@+id/tvMyScoreText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:textSize="28sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/guideline2"
-            app:layout_constraintTop_toBottomOf="@+id/tvUsersText"
-            tools:text="My Score:" />
-
-        <TextView
-            android:id="@+id/tvMyScore"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:textSize="32sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/ivCover"
-            app:layout_constraintTop_toBottomOf="@+id/tvMyScoreText"
-            tools:text="--" />
-
-        <TextView
             android:id="@+id/tvTextEpisodes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -125,7 +101,7 @@
             android:layout_marginTop="8dp"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/ivCover"
-            app:layout_constraintTop_toBottomOf="@+id/tvMyScore"
+            app:layout_constraintTop_toBottomOf="@+id/tvUsersText"
             tools:text="Episodes: " />
 
         <TextView
@@ -165,18 +141,15 @@
             android:id="@+id/tvSynopsisText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:textAlignment="textStart"
+            android:textAlignment="center"
             android:textSize="24sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/tvSynopsis"
-            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ivCover"
-            app:layout_constraintVertical_bias="1.0"
             tools:text="Synopsis: " />
 
         <TextView
@@ -190,7 +163,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvAiringEnd"
+            app:layout_constraintTop_toBottomOf="@+id/tvSynopsisText"
             tools:text="As a wild youth, elementary school student Shouya Ishida sought to beat boredom in the cruelest ways. When the deaf Shouko Nishimiya transfers into his class, Shouya and the rest of his class thoughtlessly bully her for fun. However, when her mother notifies the school, he is singled out and blamed for everything done to her. With Shouko transferring out of the school, Shouya is left at the mercy of his classmates. He is heartlessly ostracized all throughout elementary and middle school, while teachers turn a blind eye.  Now in his third year of high school, Shouya is still plagued by his wrongdoings as a young boy. Sincerely regretting his past actions, he sets out on a journey of redemption: to meet Shouko once more and make amends.  Koe no Katachi tells the heartwarming tale of Shouya's reunion with Shouko and his honest attempts to redeem himself, all while being continually haunted by the shadows of his past." />
 
         <TextView
@@ -329,7 +302,7 @@
             android:maxLines="1"
             android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/ivCover"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
             app:layout_constraintTop_toBottomOf="@+id/tvStartedAiringText"
             tools:text="Sep 17, 2016" />
 
@@ -342,7 +315,7 @@
             android:maxLines="1"
             android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/ivCover"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
             app:layout_constraintTop_toBottomOf="@+id/tvFinishedAiringText"
             tools:text="Sep 17, 2016" />
 
@@ -414,11 +387,10 @@
             android:id="@+id/tvEpisodeCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tvTextEpisodes"
             app:layout_constraintEnd_toEndOf="@+id/tvPopularity"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/tvPopularity"
-            app:layout_constraintTop_toBottomOf="@+id/tvMyScore"
             tools:text="12" />
 
         <TextView
@@ -426,9 +398,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tvPopularityText"
             app:layout_constraintStart_toEndOf="@+id/tvPopularityText"
-            app:layout_constraintTop_toBottomOf="@+id/tvEpisodeCount"
             tools:text="45" />
 
         <com.google.android.material.button.MaterialButton

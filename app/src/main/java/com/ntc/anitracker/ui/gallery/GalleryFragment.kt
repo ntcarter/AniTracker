@@ -38,6 +38,8 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery),
     // Keeps track of time since resumed to lock the user out of a tap for 1.5 seconds
     private var timeResumed: Long = 0L
 
+    private var coverTapLock = false
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -90,6 +92,7 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery),
 
     override fun onResume() {
         timeResumed = System.currentTimeMillis()
+        coverTapLock = false
         super.onResume()
     }
 
@@ -110,7 +113,7 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery),
                 if (chipAnime.isChecked) {
                     Log.d(TAG, "setUpChipGroupListeners: SETTING ANIME OPTION")
                     viewModel.currentAnimeOption = checkedId // tracks anime options selection
-                } else if(chipManga.isChecked){ // manga chip selected
+                } else if (chipManga.isChecked) { // manga chip selected
                     Log.d(TAG, "setUpChipGroupListeners: SETTING MANGA OPTION")
                     viewModel.currentMangaOption = checkedId // tracks manga options selection
                 }
@@ -196,32 +199,38 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery),
     }
 
     override fun onAnimeCoverClick(anime: TopA) {
-        lifecycleScope.launch {
-            var currentTime = System.currentTimeMillis()
-            // The API is a little slow so delay a users quick tap
-            while (currentTime - timeResumed < TAP_LOCK_TIME_MILLISECONDS) {
-                delay(1000)
-                currentTime = System.currentTimeMillis()
+        if (!coverTapLock) {
+            coverTapLock = true
+            lifecycleScope.launch {
+                var currentTime = System.currentTimeMillis()
+                // The API is a little slow so delay a users quick tap
+                while (currentTime - timeResumed < TAP_LOCK_TIME_MILLISECONDS) {
+                    delay(1000)
+                    currentTime = System.currentTimeMillis()
+                }
+                // pass the anime to the details fragment. It will handle making further api calls
+                val action =
+                    GalleryFragmentDirections.actionGalleryFragmentToAnimeDetailsFragment(anime.mal_id)
+                findNavController().navigate(action)
             }
-            // pass the anime to the details fragment. It will handle making further api calls
-            val action =
-                GalleryFragmentDirections.actionGalleryFragmentToAnimeDetailsFragment(anime.mal_id)
-            findNavController().navigate(action)
         }
     }
 
     override fun onMangaCoverClick(manga: TopM) {
-        lifecycleScope.launch {
-            var currentTime = System.currentTimeMillis()
-            // The API is a little slow so delay a users quick tap
-            while (currentTime - timeResumed < TAP_LOCK_TIME_MILLISECONDS) {
-                delay(1000)
-                currentTime = System.currentTimeMillis()
+        if (!coverTapLock) {
+            coverTapLock = true
+            lifecycleScope.launch {
+                var currentTime = System.currentTimeMillis()
+                // The API is a little slow so delay a users quick tap
+                while (currentTime - timeResumed < TAP_LOCK_TIME_MILLISECONDS) {
+                    delay(1000)
+                    currentTime = System.currentTimeMillis()
+                }
+                // pass the anime to the details fragment. It will handle making further api calls
+                val action =
+                    GalleryFragmentDirections.actionGalleryFragmentToMangaDetailsFragment(manga.mal_id)
+                findNavController().navigate(action)
             }
-            // pass the anime to the details fragment. It will handle making further api calls
-            val action =
-                GalleryFragmentDirections.actionGalleryFragmentToMangaDetailsFragment(manga.mal_id)
-            findNavController().navigate(action)
         }
     }
 

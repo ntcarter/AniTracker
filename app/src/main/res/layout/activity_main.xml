@@ -12,6 +12,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:defaultNavHost="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/nav_graph" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -23,12 +27,66 @@
         android:backgroundTint="@color/background_black"
         android:clickable="true"
         android:contentDescription="Settings Button"
-        app:borderWidth="3dp"
-        app:tint="@color/text_red"
         app:backgroundTint="@color/text_red"
+        app:borderWidth="3dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_settings"
+        app:tint="@color/text_red"
         tools:ignore="SpeakableTextPresentCheck" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabHome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="@color/background_black"
+        android:clickable="true"
+        android:contentDescription="Home Button"
+        android:visibility="gone"
+        app:backgroundTint="@color/text_red"
+        app:borderWidth="3dp"
+        app:layout_constraintBottom_toTopOf="@+id/fabBackOne"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_home"
+        app:tint="@color/text_red"
+        tools:visibility="visible"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabBackOne"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="@color/background_black"
+        android:clickable="true"
+        android:contentDescription="Back Button"
+        android:visibility="gone"
+        app:backgroundTint="@color/text_red"
+        app:borderWidth="3dp"
+        app:layout_constraintBottom_toTopOf="@+id/fabSettings"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_back"
+        app:tint="@color/text_red"
+        tools:visibility="visible"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="@color/background_black"
+        android:clickable="true"
+        android:contentDescription="Search Button"
+        android:visibility="gone"
+        app:backgroundTint="@color/text_red"
+        app:borderWidth="3dp"
+        app:layout_constraintBottom_toTopOf="@+id/fabHome"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_search"
+        app:tint="@color/text_red"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

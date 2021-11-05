@@ -17,7 +17,9 @@ import com.ntc.anitracker.data.pagingsources.AnimePagingSource
 import com.ntc.anitracker.data.pagingsources.EpisodePagingSource
 import com.ntc.anitracker.data.pagingsources.MangaPagingSource
 import com.ntc.anitracker.data.pagingsources.ReviewPagingSource
+import kotlinx.coroutines.delay
 import retrofit2.HttpException
+import java.net.SocketTimeoutException
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -103,6 +105,12 @@ class JikanRepository @Inject constructor(private val jikanAPI: JikanAPI) {
             }
         } catch (e: HttpException) {
             Log.d(TAG, "makeJikanApiCall: ERROR HTTP $e")
+            delay(5000)
+            return null
+        } catch (e: SocketTimeoutException) {
+            Log.d(TAG, "makeJikanApiCall: SOCKET TIME OUT ERROR $e")
+            delay(5000)
+            return null
         }
 
         return resultAnime
@@ -139,6 +147,12 @@ class JikanRepository @Inject constructor(private val jikanAPI: JikanAPI) {
             }
         } catch (e: HttpException) {
             Log.d(TAG, "makeJikanApiCall: ERROR HTTP $e")
+            delay(5000)
+            return null
+        } catch (e: SocketTimeoutException) {
+            Log.d(TAG, "makeJikanApiCall: SOCKET TIME OUT ERROR $e")
+            delay(5000)
+            return null
         }
 
         return resultManga

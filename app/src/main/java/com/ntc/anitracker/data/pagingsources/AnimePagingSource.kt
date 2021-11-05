@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.ntc.anitracker.api.models.topanime.TopA
+import com.ntc.anitracker.api.models.topanime.TopAnime
 import com.ntc.anitracker.data.JikanRepository
 import retrofit2.HttpException
 import java.io.IOException
@@ -21,7 +22,15 @@ class AnimePagingSource(
         val position = params.key ?: ANIME_STARTING_PAGE_INDEX // gets the page number to load
 
         return try {
-            val response = repository.makeAnimeApiCall(activeOption, position)
+            var response: TopAnime? = null
+
+            var attempts = 0;
+            // Attempt to make API call 10 times before defaulting to empty list.
+            // The API call will handle time in-between calls
+            while(response == null && attempts <= 10){
+                response = repository.makeAnimeApiCall(activeOption, position)
+                attempts++
+            }
 
             val results = response?.top ?: listOf()
 

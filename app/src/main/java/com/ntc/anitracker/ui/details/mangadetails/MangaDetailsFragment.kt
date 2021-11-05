@@ -5,6 +5,10 @@ import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.blue
+import androidx.core.graphics.green
+import androidx.core.graphics.red
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -22,6 +26,8 @@ import com.ntc.anitracker.ui.details.dialog.PictureDetailsDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlin.math.abs
+import kotlin.math.sqrt
 
 private const val TAG = "AnimeDetailsFragment"
 
@@ -108,16 +114,127 @@ class MangaDetailsFragment : Fragment(R.layout.fragment_manga_details),
     private fun createPaletteAsync(bitmap: Bitmap, mangaInfo: Manga) {
         Palette.from(bitmap).generate() { palette ->
             if (palette != null) {
-                updateColors(
-                    palette.lightMutedSwatch ?: palette.mutedSwatch,
+                var bgColor = palette.darkMutedSwatch ?: Palette.Swatch(ContextCompat.getColor(requireContext(), R.color.background_black), 1)
+
+                val contrast = calcContrast(
+                    bgColor,
+                    palette.lightMutedSwatch,
+                    palette.mutedSwatch,
+                    palette.vibrantSwatch,
+                    palette.darkVibrantSwatch,
                     palette.darkMutedSwatch,
+                    palette.dominantSwatch,
+                    palette.lightVibrantSwatch,
+                )
+
+                // sometimes button background color is too similar to its text color.
+                var btnColor =
+                    // Check for the contrast if its too low pick a different color
+                    if (abs(contrast["lightMutedSwatch"]!! - contrast["dominantSwatch"]!!) < 100 || contrast["dominantSwatch"] == 0.0) {
+                        palette.darkVibrantSwatch ?: palette.mutedSwatch ?: palette.vibrantSwatch
+                    } else {
+                        palette.dominantSwatch
+                    }
+
+                // sometimes the button color will be the same as the background color
+                if(contrast["darkMutedSwatch"] == contrast["dominantSwatch"] && contrast["dominantSwatch"] != 0.0) {
+                    btnColor = palette.vibrantSwatch ?: palette.mutedSwatch
+                }
+
+                val bdyTextColor =
+                    // Check for the contrast if its too low pick a different color
+                    if (contrast["lightMutedSwatch"]!! < 150) {
+                        when {
+                            contrast["mutedSwatch"]!! > 150 -> {
+                                palette.mutedSwatch
+                            }
+                            contrast["vibrantSwatch"]!! > 150 -> {
+                                palette.vibrantSwatch
+                            }
+                            contrast["darkVibrantSwatch"]!! > 150 -> {
+                                palette.darkVibrantSwatch
+                            }
+                            else -> {
+                                palette.dominantSwatch ?: palette.darkMutedSwatch ?: palette.lightMutedSwatch
+                            }
+                        }
+
+                    } else {
+                        palette.lightMutedSwatch
+                    }
+
+
+
+                updateColors(
+                    bdyTextColor,
+                    bgColor,
                     // sometimes the palette will not return a vibrantSwatch
                     palette.vibrantSwatch ?: palette.mutedSwatch,
-                    palette.darkVibrantSwatch,
+                    btnColor,
                     mangaInfo
                 )
             }
         }
+    }
+
+    private fun calcContrast(
+        bgColor: Palette.Swatch?,
+        lightMutedSwatch: Palette.Swatch?,
+        mutedSwatch: Palette.Swatch?,
+        vibrantSwatch: Palette.Swatch?,
+        darkVibrantSwatch: Palette.Swatch?,
+        darkMutedSwatch: Palette.Swatch?,
+        dominantSwatch: Palette.Swatch?,
+        lightVibrantSwatch: Palette.Swatch?
+    ): HashMap<String, Double> {
+        val result = HashMap<String, Double>()
+
+        if (bgColor != null) {
+            result["lightMutedSwatch"] = if (lightMutedSwatch != null) {
+                calculate(lightMutedSwatch, bgColor)
+            } else {
+                0.0
+            }
+            result["mutedSwatch"] = if (mutedSwatch != null) {
+                calculate(mutedSwatch, bgColor)
+            } else {
+                0.0
+            }
+            result["vibrantSwatch"] = if (vibrantSwatch != null) {
+                calculate(vibrantSwatch, bgColor)
+            } else {
+                0.0
+            }
+            result["darkVibrantSwatch"] = if (darkVibrantSwatch != null) {
+                calculate(darkVibrantSwatch, bgColor)
+            } else {
+                0.0
+            }
+            result["darkMutedSwatch"] = if (darkMutedSwatch != null) {
+                calculate(darkMutedSwatch, bgColor)
+            } else {
+                0.0
+            }
+            result["dominantSwatch"] = if (dominantSwatch != null) {
+                calculate(dominantSwatch, bgColor)
+            } else {
+                0.0
+            }
+            result["lightVibrantSwatch"] = if (lightVibrantSwatch != null) {
+                calculate(lightVibrantSwatch, bgColor)
+            } else {
+                0.0
+            }
+        }
+        return result
+    }
+
+    private fun calculate(swatch: Palette.Swatch, bgColor: Palette.Swatch): Double {
+        val rMean = swatch.rgb.red.toLong() + bgColor.rgb.red.toLong()
+        val r = swatch.rgb.red.toLong() - bgColor.rgb.red.toLong()
+        val g = swatch.rgb.green.toLong() - bgColor.rgb.green.toLong()
+        val b = swatch.rgb.blue.toLong() - bgColor.rgb.blue.toLong()
+        return sqrt((((512 + rMean) * r * r shr 8) + 4 * g * g + ((767 - rMean) * b * b shr 8)).toDouble())
     }
 
     private fun updateColors(
@@ -143,15 +260,20 @@ class MangaDetailsFragment : Fragment(R.layout.fragment_manga_details),
                 tvMangaSynopsis.setTextColor(bodyTextColor.rgb)
                 tvMangaSerializations.setTextColor(bodyTextColor.rgb)
                 tvMangaGenres.setTextColor(bodyTextColor.rgb)
-                tvMangaMyScore.setTextColor(bodyTextColor.rgb)
                 tvMangaVolumes.setTextColor(bodyTextColor.rgb)
-            } else {
-                Log.d(TAG, "updateColors: NULLLLLLLLLLLLLLLLLLLLLLL")
+                // buttons
+                btnMangaCharactersAndStaff.setTextColor(bodyTextColor.rgb)
+                btnMangaReviews.setTextColor(bodyTextColor.rgb)
+                btnMangaRecommendations.setTextColor(bodyTextColor.rgb)
+                btnMangaRelated.setTextColor(bodyTextColor.rgb)
             }
 
             if (backgroundColor != null) {
                 bgColor = backgroundColor.rgb
                 svMangaDetails.setBackgroundColor(backgroundColor.rgb)
+            }else {
+                bgColor = R.color.background_black
+                svMangaDetails.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.background_black))
             }
 
             if (titleTextColor != null) {
@@ -162,7 +284,6 @@ class MangaDetailsFragment : Fragment(R.layout.fragment_manga_details),
                 tvMangaTextChapters.setTextColor(titleTextColor.rgb)
                 tvMangaTextScore.setTextColor(titleTextColor.rgb)
                 tvMangaUsersText.setTextColor(titleTextColor.rgb)
-                tvMangaMyScoreText.setTextColor(titleTextColor.rgb)
                 tvMangaPopularityText.setTextColor(titleTextColor.rgb)
                 tvMangaStartedPublishingText.setTextColor(titleTextColor.rgb)
                 tvMangaFinishedPublishingText.setTextColor(titleTextColor.rgb)
@@ -170,12 +291,6 @@ class MangaDetailsFragment : Fragment(R.layout.fragment_manga_details),
                 tvMangaGenresText.setTextColor(titleTextColor.rgb)
                 tvSerializationsText.setTextColor(titleTextColor.rgb)
                 tvMangaVolumesText.setTextColor(titleTextColor.rgb)
-
-                // buttons
-                btnMangaCharactersAndStaff.setTextColor(titleTextColor.rgb)
-                btnMangaReviews.setTextColor(titleTextColor.rgb)
-                btnMangaRecommendations.setTextColor(titleTextColor.rgb)
-                btnMangaRelated.setTextColor(titleTextColor.rgb)
             }
 
             if (buttonColor != null) {
@@ -213,7 +328,6 @@ class MangaDetailsFragment : Fragment(R.layout.fragment_manga_details),
             }
             tvMangaTextScore.text = "Score:"
             tvMangaUsersText.text = "Users:"
-            tvMangaMyScoreText.text = "My Score:"
             tvMangaTextChapters.text = "Chapters:"
             tvMangaVolumesText.text = "Volumes:"
             tvMangaPopularityText.text = "Popularity:"
@@ -222,7 +336,6 @@ class MangaDetailsFragment : Fragment(R.layout.fragment_manga_details),
             tvMangaSynopsisText.text = "Synopsis:"
             tvMangaGenresText.text = "Genres:"
             tvSerializationsText.text = "Serializations:"
-            tvMangaMyScore.text = "--"
             btnMangaCharactersAndStaff.text = "Characters And Staff Information"
             btnMangaRecommendations.text = "Recommendations"
             btnMangaReviews.text = "Reviews"

@@ -6,9 +6,10 @@
         <entry key="..\:/githubDesktop/AniTracker/app/src/main/res/drawable/gradient.xml" value="0.3769230769230769" />
         <entry key="..\:/githubDesktop/AniTracker/app/src/main/res/drawable/gradient_gallery.xml" value="0.3769230769230769" />
         <entry key="..\:/githubDesktop/AniTracker/app/src/main/res/drawable/gradient_gallery_bg.xml" value="0.3769230769230769" />
+        <entry key="..\:/githubDesktop/AniTracker/app/src/main/res/drawable/ic_back.xml" value="0.22135416666666666" />
         <entry key="..\:/githubDesktop/AniTracker/app/src/main/res/drawable/ic_error.xml" value="0.22135416666666666" />
         <entry key="..\:/githubDesktop/AniTracker/app/src/main/res/drawable/ic_settings.xml" value="0.19375" />
-        <entry key="..\:/githubDesktop/AniTracker/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
+        <entry key="..\:/githubDesktop/AniTracker/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/githubDesktop/AniTracker/app/src/main/res/layout/character_details_fragment.xml" value="0.36666666666666664" />
         <entry key="..\:/githubDesktop/AniTracker/app/src/main/res/layout/dialog_fragment_pictures.xml" value="0.22552083333333334" />
         <entry key="..\:/githubDesktop/AniTracker/app/src/main/res/layout/fragment_anime_details.xml" value="0.33" />

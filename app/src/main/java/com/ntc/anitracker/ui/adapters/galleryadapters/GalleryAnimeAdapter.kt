@@ -45,7 +45,9 @@ class GalleryAnimeAdapter(
                     .into(imageCover)
 
                 imageCover.setOnClickListener {
-                    listener.onAnimeCoverClick(top)
+                    if(bindingAdapterPosition != RecyclerView.NO_POSITION){
+                        listener.onAnimeCoverClick(top)
+                    }
                 }
 
                 titleText.text = top.title
